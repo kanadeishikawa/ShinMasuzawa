@@ -10,7 +10,8 @@
 *.pptx
 *.org
 *.root
-bin/*
-lib/*
-gomi/*
-backup/*
+bin/
+lib/
+gomi/
+backup/
+LaTeX/gomi/
