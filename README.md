@@ -40,7 +40,7 @@ ShinMasuzawa.ccの中のいくつかの変数を状況によって書き換えてください。
    - 「OVERLAPPING SCORES WERE DETECTED!」と表示された場合、審査表の中に順位の重複があります。Judge No.は、審査表の上から数えて1, 2...となっています。
    - 「A SCORE OUT OF RANGE WAS DETECTED!」と表示された場合、審査表に-1位などのようなおかしな順位があります。
 
-## 順位表の作成
+### 順位表の作成
 LaTeX\ディレクトリで、`./compile_latex.sh`とコマンド入力すると、Result_Tohoku.texがコンパイルされてResult_Tohoku.pdfが作成されます。
 
 
