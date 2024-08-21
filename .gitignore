@@ -1,0 +1,16 @@
+*.o
+*.gz
+*.aux
+*.dvi
+*.lof
+*.log
+*.lot
+*.toc
+*.swp
+*.pptx
+*.org
+*.root
+bin/*
+lib/*
+gomi/*
+backup/*
