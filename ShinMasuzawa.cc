@@ -475,6 +475,7 @@ int main(){
       for(int I=0;I<NofSchool;I++){
         if(scoretree[J][I] == kakutei){
           scoretree[J][I] = -999;
+          outputtree[J][kakutei] = -999;
         } //if
       } //for
     } //for
