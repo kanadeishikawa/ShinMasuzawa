@@ -11,5 +11,5 @@ git add -A
 #git add -u
 git commit -m "AUTO COMMIT at ${DATE}"
 git push
-git log
+#git log
 date

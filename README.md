@@ -37,8 +37,8 @@ ShinMasuzawa.ccの中のいくつかの変数を状況によって書き換えてください。
 - `./bin/ShinMasuzawa`とコマンドを入力すると、プログラムが実行されます。
 - flag_displayがfalseの場合、審査表が出力されたあとに、「dai 1 i: Akita Minami」のような形で総合順位が出力されます。
 - プログラムが止まってしまうとき
- - 「OVERLAPPING SCORES WERE DETECTED!」と表示された場合、審査表の中に順位の重複があります。Judge No.は、審査表の上から数えて1, 2...となっています。
- - 「A SCORE OUT OF RANGE WAS DETECTED!」と表示された場合、審査表に-1位などのようなおかしな順位があります。
+   - 「OVERLAPPING SCORES WERE DETECTED!」と表示された場合、審査表の中に順位の重複があります。Judge No.は、審査表の上から数えて1, 2...となっています。
+   - 「A SCORE OUT OF RANGE WAS DETECTED!」と表示された場合、審査表に-1位などのようなおかしな順位があります。
 
 ## 順位表の作成
 LaTeX\ディレクトリで、`./compile_latex.sh`とコマンド入力すると、Result_Tohoku.texがコンパイルされてResult_Tohoku.pdfが作成されます。
