@@ -2,7 +2,7 @@
 
 複数人の審査員が作成した順位表から、新増沢式採点法によって各団体の総合順位を決定するプログラムです。
 新増沢式採点法とは、全日本合唱コンクール等で採用されている順位決定方法で、公平かつ信頼度の高い方式と考えられています。
-新増沢式採点法の詳細は、合唱連盟のWebサイトを御覧ください。(https://jcanet.or.jp/event/concour/shinmasuzawa-kaisetu201001.htm)
+新増沢式採点法の詳細は、[合唱連盟のWebサイト](https://jcanet.or.jp/event/concour/shinmasuzawa-kaisetu201001.htm)を御覧ください。
 
 
 ## 仕様
@@ -28,3 +28,23 @@ ShinMasuzawa.ccの中のいくつかの変数を状況によって書き換えてください。
 - 22行目のListOfSchoolには、各団体名を入力してください。
 - 255行目に、インプットとなる審査表のファイル名を入力してください。
 - 17行目のflag_displayをtrueにすると、総合順位を算出する際の過程がすべて出力されるようになります。falseにすると、最終結果の総合順位のみが出力されます。
+
+### コンパイル
+まず、`mkdir bin`および`mkdir lib`をコマンドを入力してbin/ディレクトリとlib/ディレクトリを作成してください。
+次に、`make`とコマンドを打てばコンパイルされ、実行ファイル\bin\ShinMasuzawaが生成されます。
+
+### 実行
+- `./bin/ShinMasuzawa`とコマンドを入力すると、プログラムが実行されます。
+- flag_displayがfalseの場合、審査表が出力されたあとに、「dai 1 i: Akita Minami」のような形で総合順位が出力されます。
+- プログラムが止まってしまうとき
+-- 「OVERLAPPING SCORES WERE DETECTED!」と表示された場合、審査表の中に順位の重複があります。Judge No.は、審査表の上から数えて1, 2...となっています。
+-- 「A SCORE OUT OF RANGE WAS DETECTED!」と表示された場合、審査表に-1位などのようなおかしな順位があります。
+
+## 順位表の作成
+LaTeX\ディレクトリで、`./compile_latex.sh`とコマンド入力すると、Result_Tohoku.texがコンパイルされてResult_Tohoku.pdfが作成されます。
+
+
+## 著作権
+制作者kanade (kanadeishikawa) は、このプログラムの著作権を放棄します。
+ご自由にダウンロード・使用・改変・再配布していただいて構いません。
+使用する際の連絡は不要です。
