@@ -11,17 +11,10 @@ using namespace std;
 #include <algorithm>
 #include <iomanip>
 
-const int NofJudge = 7; // max = 9
-const int NofSchool = 24;
-
 const bool flag_display = false; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
 
 
-//const char ListOfSchool[NofSchool][40] = {"Suginami", "Takamatsu", "Noda", "Kozukata", "Seisen", "Obihiro", "Sagajo", "Gihu", "Moojo", "Ichikawa", "Nagano", "Nagasaki", "Junshin", "Kobe", "Matsue", "Saijo"};
-
-const char ListOfSchool[NofSchool][40] = {"Tagajo", "Hachinohe Kita", "Teikyo Asaka", "Yuzawa", "Ichinoseki Gakuin", "Yamagata Higashi", "Iwaki Yumoto", "Chidoukan", "St. Ursula", "Senshu Kitakami", "Akita Minami", "Hirosaki Chuo", "Izumi Tateyama", "Kurosawajirikita", "Asaka Reimei", "Aomori Yamada", "Meio", "Sogakukan", "Morioka Daiichi", "Iwaki", "Aomori", "Yamagata Chuo", "Sendai Mukaiyama", "Omagari"}; //Tohoku 2024
-
-int KessenTouhyou(int scoretree[][NofSchool], bool flag_kari_1[], int Nofkari1){
+int KessenTouhyou(int NofSchool, int NofJudge, const vector<vector<int>> scoretree, const vector<bool> flag_kari_1, int Nofkari1, const vector<string> ListOfSchool){
 
   int aka = -9;// 対戦カード
   int ao = -9;// 対戦カード
@@ -98,8 +91,8 @@ int KessenTouhyou(int scoretree[][NofSchool], bool flag_kari_1[], int Nofkari1){
   //もし勝ちポイントが同点で並んだ場合、勝ちポイント１位の学校だけで勝負する
   else if(count_max_kachi > 1){
     if(flag_display == true){
-      cout << "There are schools tied for first place with the same winning points!" << endl;
-      cout << "We will compare those schools with each other." << endl;
+      cout << "winning points ga douten desu!" << endl;
+      cout << "sorera no dantai nomi de saido hikaku shimasu." << endl;
     } //if
 
     bool flag_kessen[NofSchool] = {};
@@ -197,8 +190,8 @@ int KessenTouhyou(int scoretree[][NofSchool], bool flag_kari_1[], int Nofkari1){
     else if(count_max_kachi > 1){
 
       if(flag_display == true){
-        cout << "There are still multiple schools tied for first place in winning points!" << endl;
-        cout << " In this case, the school with the most wins will be the winner." << endl;
+        cout << "mata douten desu!!" << endl;
+        cout << "number of wins ga ooi dantai ga kachi desu" << endl;
       } //if
       int school_max_kachikazu = -1;
       int max_kachikazu = -1;
@@ -213,6 +206,14 @@ int KessenTouhyou(int scoretree[][NofSchool], bool flag_kari_1[], int Nofkari1){
         } //if
       } //for
 
+      if(flag_display == true){
+        for(int J=0;J<NofSchool;J++){
+          if(flag_kari_1[J] == true){
+            cout << setw(17) << ListOfSchool[J] << " number of wins: " << setw(2) << kachi_kazu[J] << endl;
+          } //if
+        } //for
+      } //if
+
       //勝ち数１位が１校の場合
       if(number_of_max_kachikazu == 1){
         win_school = school_max_kachikazu;
@@ -220,6 +221,15 @@ int KessenTouhyou(int scoretree[][NofSchool], bool flag_kari_1[], int Nofkari1){
       //勝ち数１位が複数校の場合
       //最も演奏順が早かった学校が勝利（これは私の価値観によるものです）
       else{
+        if(flag_display == true){
+          cout << "number of wins mo douten desu!!!" << endl;
+          cout << "ensou jun ga hayai dantai ga kachimasu (kanade's rule)" << endl;
+          for(int J=0;J<NofSchool;J++){
+            if(flag_kari_1[J] == true){
+              cout << setw(17) << ListOfSchool[J] << " ensou jun: " << setw(2) << J+1 << endl;
+            } //if
+          } //for
+        } //if
         for(int J=0;J<NofSchool;J++){
           if(kachi_kazu[J] == max_kachikazu){
             win_school = J;
@@ -230,11 +240,6 @@ int KessenTouhyou(int scoretree[][NofSchool], bool flag_kari_1[], int Nofkari1){
 
       //cout
       if(flag_display == true){
-        for(int J=0;J<NofSchool;J++){
-          if(flag_kessen[J] == true){
-            cout << setw(17) << ListOfSchool[J] << " number of wins: " << setw(2) << kachi_kazu[J] << endl;
-          } //if
-        } //for
         cout << "  --> the winner is " << ListOfSchool[win_school] << endl;
       } //if
 
@@ -258,31 +263,63 @@ int main(){
      exit(0);
   }
   string str;
-  int score[NofSchool] = {};
-  int scoretree[NofJudge][NofSchool] = {}; // scoretree[審査員ID][順位] value=School ID
-  int J = 0; //行カウンター
+  //int score[NofSchool] = {};
+  //int scoretree[NofJudge][NofSchool] = {}; // scoretree[審査員ID][順位] value=School ID
+  int row_count = 0; //行カウンター0はじまり
 
-  int outputtree[NofJudge][NofSchool] = {}; //outputtree[審査員ID][学校ID] value = 順位
-                                            //display表示専用
+  int NofSchool;
+  int NofSchool_save;
+  int NofJudge;
+
+  //int outputtree[NofJudge][NofSchool] = {}; //outputtree[審査員ID][学校ID] value = 順位
+  //                                          //display表示専用
+
+  vector<string> ListOfSchool;
+  vector<int> score;
+  vector<vector<int>> scoretree;   // scoretree[審査員ID][順位] value=School ID
+  vector<vector<int>> outputtree;  //outputtree[審査員ID][学校ID] value = 順位  display表示専用
 
   while (getline(ifs,str)) {
     stringstream ss(str);
     string item;
-    int index = 0; //列カウンター
 
-    while(ss >> item && index < NofSchool+1){
-      if(J != 0) score[index] = stoi(item);
-      index ++;
+    score.clear();
+
+    while(ss >> item){
+
+      //1行目
+      if(row_count == 0){
+        ListOfSchool.push_back(item);
+      } //if
+
+      //2行目以降
+      if(row_count != 0){
+        score.push_back(stoi(item));
+      } //if
     } //while
 
-    for(int I=0;I<NofSchool;I++){
-      if(J != 0){
-        scoretree[J-1][score[I]-1] = I;
-        outputtree[J-1][I] = score[I]-1;
-      } //if
-    }
-    J++;
+    NofSchool_save = ListOfSchool.size();
+    NofSchool = score.size();
+
+    if(row_count != 0 && NofSchool != NofSchool_save){
+      cout << "The number of elements per line does not match!" << endl;
+      cout << row_count << " " << NofSchool << " " << NofSchool_save << endl;
+      return -1;
+    } //if
+
+    if(row_count != 0){
+      outputtree.push_back(score); //ひとまず１行分の値をfillする
+      scoretree.push_back(score); //ひとまず１行分の値をfillする
+      for(int i=0;i<NofSchool;i++){
+        outputtree[row_count-1][i] = outputtree[row_count-1][i] - 1; //これが正しい値
+        scoretree[row_count-1][score[i]-1] = i; //これが正しい値
+      }  //for
+    } //if
+
+    row_count ++;
   } //while
+
+  NofJudge = row_count-1;
 
   bool flag_stop = false;
   for(int I=0;I<NofJudge;I++){
@@ -314,19 +351,20 @@ int main(){
   int count_junni = 1;
   while(count_junni <= NofSchool){
 
+
     if(flag_display == true || count_junni==1){
       if(flag_display == true) cout << "=======================================" << endl;
       cout << "                  ";
       for(int J=0;J<NofJudge;J++){
-        cout << "Judge" << setw(2) << J+1 << " ";
+        cout << "Judge" << setw(2) << J+1 << "  ";
       } // for
       cout << endl;
 
       for(int I=0;I<NofSchool;I++){
         cout << setw(17) << ListOfSchool[I] << " ";
         for(int J=0;J<NofJudge;J++){
-          if(outputtree[J][I] != -999) cout << setw(7) << outputtree[J][I]+1 << " ";
-          else  cout << "        ";
+          if(outputtree[J][I] != -999) cout << setw(7) << outputtree[J][I]+1 << "  ";
+          else  cout << "         ";
           //cout << scoretree[J][I] << " ";
         } //for
       cout << endl;
@@ -334,8 +372,15 @@ int main(){
     } //if
 
     //順位表で、各審査員の最上位校をリストアップする
-    int vote[NofSchool] = {};
-    for(J=0;J<NofJudge;J++){
+    //int vote[NofSchool] = {};
+    vector<int> vote;
+    vector<int> vote_sort;
+    for(int J=0;J<NofSchool;J++){
+      vote.push_back(0); //initialize
+      vote_sort.push_back(0); //initialize
+    } //for
+
+    for(int J=0;J<NofJudge;J++){
       bool flag_vote = true;
 
       int I = 0;
@@ -346,128 +391,130 @@ int main(){
         else{
           flag_vote = false;
           vote[scoretree[J][I]] ++;
+          vote_sort[scoretree[J][I]] ++;
         } //else
       } //while
 
     } //for
 
+    std::sort(vote_sort.begin(), vote_sort.end(), greater<int>());
+
     int kakutei = -999; //最上位順位確定校
 
-    //ステップ１：過半数得票の１校はあるか？
-    for(J=0;J<NofSchool;J++){
-      if(((double) vote[J]) > ((double) NofJudge/2)){
-        if(flag_display == true){
-          cout << "Case 1: There is a school that has won the majority of first-place votes!" << endl;
+    vector<int> kari_ni_vote;
+    vector<int> NofSchool_kari_ni_vote;
+    for(int J=0;J<NofSchool;J++){
+        kari_ni_vote.push_back(0); //initialize
+        NofSchool_kari_ni_vote.push_back(0); //initialize
+    } //for
+
+    int vote_tmp = -999;
+    int count_tmp = 0;
+    for(int J=0;J<NofSchool;J++){
+      if(vote_tmp != vote_sort[J]){
+          kari_ni_vote[count_tmp] = vote_sort[J];
+          vote_tmp = vote_sort[J];
+      } //if
+      count_tmp ++;
+    } //for
+
+    //kari_ni_vote[0]: 仮の第１位の得票数
+    //kari_ni_vote[1]: 仮の第２位の得票数
+    //kari_ni_vote[2]: 仮の第３位の得票数 ... と続く
+
+    for(int R=0;R<kari_ni_vote.size();R++){
+      //cout << "kari_ni_vote[" << R << "] : " << kari_ni_vote[R] << endl;
+    } //for
+
+    for(int J=0;J<NofSchool;J++){
+      for(int i=0;i<NofSchool;i++){
+        if(kari_ni_vote[J] > 0 && vote[i] == kari_ni_vote[J]){
+          NofSchool_kari_ni_vote[J] ++;
         } //if
-      kakutei = J;
-      } //if
+      } //for
     } //for
 
-    //ステップ２：過半数得票の１校がない場合
-    //最大得票数と２番めの得票数は？
-    int ichiban_tokuhyou = 0;
-    int niban_tokuhyou = 0;
-    for(J=0;J<NofSchool;J++){
-      if(vote[J] > ichiban_tokuhyou){
-        ichiban_tokuhyou = vote[J];
-      } //if
-    } //for
-
-    for(J=0;J<NofSchool;J++){
-      if(vote[J] > niban_tokuhyou && vote[J] < ichiban_tokuhyou){
-        niban_tokuhyou = vote[J];
-      } //if
-    } //for
+    //NofSchool_kari_ni_vote[0]: 仮の第１位の得票数を得た学校の数
+    //NofSchool_kari_ni_vote[1]: 仮の第２位の得票数を得た学校の数
+    //NofSchool_kari_ni_vote[2]: 仮の第３位の得票数を得た学校の数 ... と続く
 
 
-    //最大得票を得た学校は？(仮の１位)
-    bool flag_kari_1[NofSchool] = {};
-    for(J=0;J<NofSchool;J++){
-      flag_kari_1[J] = false;
-    } //for
+    bool flag_loop = false;
+    int kari_junni = 0;
 
-    int Nofkari1 = 0;
-    for(J=0;J<NofSchool;J++){
-      if(vote[J] == ichiban_tokuhyou){
-        flag_kari_1[J] = true;
-        Nofkari1 ++;
-      } //if
-      else{
-        flag_kari_1[J] = false;
-      } //else
-    } //for
+    while(flag_loop != true){ //過半数に達するまでループする
 
-    //２番めの得票を得た学校は？(仮の２位)
-    bool flag_kari_2[NofSchool] = {};
-    for(J=0;J<NofSchool;J++){
-      flag_kari_2[J] = false;
-    } //for
+      //第(kari_junni+1)位までの団体で、過半数に達するか？
+      int NofVote = 0;
+      for(int j=0;j<=kari_junni;j++){
+        NofVote = NofVote + NofSchool_kari_ni_vote[j]*kari_ni_vote[j];
+      } //for
 
-    int Nofkari2 = 0;
-    for(J=0;J<NofSchool;J++){
-      if(vote[J] == niban_tokuhyou){
-        flag_kari_2[J] = true;
-        Nofkari2 ++;
-      } //if
-      else{
-        flag_kari_2[J] = false;
-      } //else
-    } //for
+      if(NofVote > (int) NofJudge/2){
+        if(flag_display ==true){
+           cout << "kari no " << kari_junni+1 << " i made de kahannsuu!" << endl;
+           for(int i=0;i<=kari_junni;i++){
+             for(int j=0;j<NofSchool;j++){
+               if(vote[j] == kari_ni_vote[i]) cout << "   kari no " << i+1 << " i : " << ListOfSchool[j] 
+                                                            << ", number of votes is " << vote[j] << endl;
+             } //for j
+           } //for i
+        } //if flag_display ==true
 
+        int SelectedSchool = -999;
 
-    //仮の１位が複数で、獲得票合計が過半数のとき、仮の１位どうしでの総当たりで決める
-    if(Nofkari1 > 1 && ((double) ichiban_tokuhyou*Nofkari1) > ((double) NofJudge/2)){
-      if(flag_display == true){
-        cout << "Case 2: There are multiple <<provisional first-place>> candidates, and together they hold the majority of votes!" << endl;
-        cout << "        A round-robin among these candidates will determine the final first-place winner." << endl;
-      } //if
-      kakutei = KessenTouhyou(scoretree, flag_kari_1, Nofkari1);
-    } // if
+        for(int i=kari_junni;i>=0;i--){ //仮の順位が大きい方から始める
 
-    //仮の１位の合計得票数が過半数に満たないとき、仮の１位と仮の２位での総当たりで決める
-    else if(((double) ichiban_tokuhyou*Nofkari1) < ((double) NofJudge/2) && ((double) ichiban_tokuhyou*Nofkari1 + niban_tokuhyou*Nofkari2) > ((double) NofJudge/2)){
-      if(flag_display == true){
-        cout << "Case 3: The total votes for the <<provisional first-place>> candidates do not reach a majority!" << endl;
-        cout << "        A round-robin between (among) the <<provisional first-place>> and <<provisional second-place>> candidates will determine the final first-place winner." << endl;
-      } //if
-      //仮の２位が１校の場合
-      if(Nofkari2 == 1){
-        if(flag_display == true){
-          cout << "Case 3-1: The <<provisional second place>> is held by one school = ";
-        } //if
-        for(J=0;J<NofSchool;J++){
-          if(flag_kari_2[J] == true){
-            Nofkari1 ++;
-            flag_kari_1[J] = true;
-            if(flag_display == true){
-              cout << ListOfSchool[J] << endl;;
+          vector<bool> flag_kari_junni;
+          int NofSchool_kari_junni = 0;
+          for(int j=0;j<NofSchool;j++){
+            if(vote[j] == kari_ni_vote[i]){
+              flag_kari_junni.push_back(true);
+              NofSchool_kari_junni ++;
             } //if
+            else{
+              flag_kari_junni.push_back(false);
+            } //else
+          } //for j
+
+          if(SelectedSchool != -999){
+            flag_kari_junni[SelectedSchool] = true;
+            NofSchool_kari_junni ++;
           } //if
-        } //for
 
-        kakutei = KessenTouhyou(scoretree, flag_kari_1, Nofkari1);
-      } //if
 
-      //仮の２位が複数校の場合、まず仮の２位のどうしで予選の総当たりを行なって、勝ち残った１校と仮の１位どうしで決勝総当たりをする
-      else if(Nofkari2 > 1){
-        if(flag_display == true){
-          cout << "Case 3-2: There are multiple <<provisional second-place>> schools!" << endl;
-          cout << "          In this case, a round-robin among the <<provisional second-place>> schools will determine the one remaining school." << endl;
-        } //if
- 
-        int yosen_tsuuka_kari2 = KessenTouhyou(scoretree, flag_kari_2, Nofkari2);
-        Nofkari1 ++;
-        flag_kari_1[yosen_tsuuka_kari2] = true;
-        if(flag_display == true){
-          cout << "Next, a round-robin among the <<provisional first-place>> schools and the remaining <<provisional second-place>> school will determine the final first-place winner." << endl;
-        } //if
-        kakutei = KessenTouhyou(scoretree, flag_kari_1, Nofkari1);
-    for(int I=0;I<NofSchool;I++){
-        
-    } //for
-      } //else if
+          if(flag_display == true){
+            cout << "kari no " << i+1 << " i wo kangaemasu" << endl;
+          } //if
 
-    } //else if
+          if(NofSchool_kari_junni == 1){  //仮の第(kari_junni +1)位の学校が１校の場合
+            for(int j=0;j<NofSchool;j++){
+              if(vote[j] == kari_ni_vote[i]) SelectedSchool = j;
+            } //for j
+            if(flag_display == true){
+              cout << "   --> " << ListOfSchool[SelectedSchool] << " ga erabare mashita" << endl;
+            } //if
+
+          } //if
+
+          else{  //仮の第(kari_junni +1)位の学校が複数校の場合 同順位内で決選投票
+
+            SelectedSchool = KessenTouhyou(NofSchool, NofJudge, scoretree, flag_kari_junni, NofSchool_kari_junni, ListOfSchool);
+          } //else
+          
+          if(i == 0){
+            kakutei = SelectedSchool;
+            flag_loop = true;
+          } //if
+        } //for i
+
+      } //if 過半数
+
+      //過半数に達しない場合
+      else{
+        kari_junni ++;
+      } //else
+    } //while
 
     //ここまでで、最上位校が確定(kakutei)
     //順位表からその団体を削除する
@@ -483,7 +530,7 @@ int main(){
     cout << "dai " << count_junni << " i: " << ListOfSchool[kakutei] << endl;
     count_junni ++;
 
-  } //while count_junni <= NofSchool
+  } //while count_junni <= NofSchoo
 
   cout << "Well done!" << endl;
   return 0;
