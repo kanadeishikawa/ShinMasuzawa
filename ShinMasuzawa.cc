@@ -235,7 +235,7 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
 
         if(flag_display == true){
           cout << "number of wins mo douten desu!!!" << endl;
-          cout << "shinsa-incho no junni de kimemasu" << endl;
+          cout << "shinsa-incho (Judge " << chair << ") no junni de kimemasu" << endl;
           for(int J=0;J<NofSchool;J++){
             if(flag_kessen2[scoretree[chair-1][J]] == true){
               cout << setw(17) << ListOfSchool[scoretree[chair-1][J]] << " shinsa-incho no junni: " << setw(2) << J+1 << endl;
@@ -375,6 +375,7 @@ int main(){
 
 
   int count_junni = 1;
+  cout << "<<< The chair is Judge" << setw(2) << chair << " >>>" << endl;
   while(count_junni <= NofSchool){
 
 
