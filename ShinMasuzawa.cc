@@ -302,8 +302,10 @@ int main(){
     NofSchool = score.size();
 
     if(row_count != 0 && NofSchool != NofSchool_save){
+      cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
       cout << "The number of elements per line does not match!" << endl;
-      cout << row_count << " " << NofSchool << " " << NofSchool_save << endl;
+      cout << "The strange row number = " << row_count+1 << "." << endl;
+      cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
       return -1;
     } //if
 
@@ -320,6 +322,12 @@ int main(){
   } //while
 
   NofJudge = row_count-1;
+  if(NofJudge%2 == 0){
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+    cout << "Number of Judges must be odd!" << endl;
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+    return -1;
+  } //if
 
   bool flag_stop = false;
   for(int I=0;I<NofJudge;I++){
