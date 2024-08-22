@@ -14,7 +14,7 @@ using namespace std;
 const bool flag_display = false; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
 
 
-int KessenTouhyou(int NofSchool, int NofJudge, const vector<vector<int>> scoretree, const vector<bool> flag_kari_1, int Nofkari1, const vector<string> ListOfSchool){
+int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<int>> scoretree, const vector<bool> flag_kari_1, const int Nofkari1, const vector<string> ListOfSchool){
 
   int aka = -9;// 対戦カード
   int ao = -9;// 対戦カード
