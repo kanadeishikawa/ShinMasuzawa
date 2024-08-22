@@ -43,7 +43,13 @@ ShinMasuzawa.ccの中のいくつかの変数を状況によって書き換えてください。
 LaTeX/ディレクトリで、`./compile_latex.sh`とコマンド入力すると、Result_Tohoku.texがコンパイルされてResult_Tohoku.pdfが作成されます。
 
 
+
+## 制作者と連絡先
+制作者kanade (kanadeishikawa) は、平たく言えば放射線の研究をしている大学院生です。
+バグや問題等ありましたら、メール (graparaleaf2013@gmail.com) か、ツイッター (https://x.com/EVxsd3tL6HzOLxt)までご一報いただければ幸いです。
+
+
 ## 著作権
-制作者kanade (kanadeishikawa) は、このプログラムの著作権を放棄します。
+制作者は、このプログラムの著作権を放棄します。
 ご自由にダウンロード・使用・改変・再配布していただいて構いません。
 その際の連絡は不要です。
