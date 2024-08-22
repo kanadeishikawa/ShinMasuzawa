@@ -333,7 +333,7 @@ int main(){
   for(int I=0;I<NofJudge;I++){
     for(int J=0;J<NofSchool;J++){
       for(int JJ=J+1;JJ<NofSchool;JJ++){
-        if(outputtree[I][J] == outputtree[I][JJ] && outputtree[I][J] != -999){
+        if(outputtree[I][J] == outputtree[I][JJ] && outputtree[I][J] != -999 && flag_stop == false){
           cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
           cout << "OVERLAPPING SCORES WERE DETECTED!" << endl;
           cout << "IN Judge No. " << I+1 << ", RANK OF " << ListOfSchool[J]  << " AND " << ListOfSchool[JJ] << " ARE SAME: " << outputtree[I][J]+1 << endl;
@@ -343,7 +343,7 @@ int main(){
 
       } //for JJ
 
-      if(outputtree[I][J] < 0 || outputtree[I][J] >= NofSchool){
+      if((outputtree[I][J] < 0 || outputtree[I][J] >= NofSchool) && flag_stop == false){
         cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
         cout << "A SCORE OUT OF RANGE WAS DETECTED!" << endl;
         cout << "IN Judge No. " << I+1 << ", RANK OF " << ListOfSchool[J] << " IS OUT OF RANGE: " << outputtree[I][J]+1 << endl;
