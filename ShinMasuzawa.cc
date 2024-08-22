@@ -13,7 +13,7 @@ using namespace std;
 
 const bool flag_display = false; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
 
-const int chair = 1; //審査員長は最上位に記載された審査員
+const int chair = 1; //審査員長の順位は審査表の最も上に記載
 
 
 int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<int>> scoretree, const vector<bool> flag_kari_1, const int Nofkari1, const vector<string> ListOfSchool){
