@@ -46,7 +46,7 @@ LaTeX/ディレクトリで、`./compile_latex.sh`とコマンド入力すると、Result_Tohoku.te
 
 
 ## 制作者と連絡先
-制作者kanade (kanadeishikawa) は、平たく言えば放射線の研究をしている大学院生です。
+制作者kanadeは、平たく言えば放射線の研究をしている大学院生です。
 バグや問題等ありましたら、メール (graparaleaf2013＿あっと＿gmail.com) か、[ツイッター](https://x.com/EVxsd3tL6HzOLxt)までご一報いただければ幸いです。
 
 
