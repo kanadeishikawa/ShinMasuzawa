@@ -274,16 +274,11 @@ int main(){
      exit(0);
   }
   string str;
-  //int score[NofSchool] = {};
-  //int scoretree[NofJudge][NofSchool] = {}; // scoretree[¿³ºº°÷ID][½ç°Ì] value=School ID
   int row_count = 0; //¹Ô¥«¥¦¥ó¥¿¡¼0¤Ï¤¸¤Þ¤ê
 
   int NofSchool;
   int NofSchool_save;
   int NofJudge;
-
-  //int outputtree[NofJudge][NofSchool] = {}; //outputtree[¿³ºº°÷ID][³Ø¹»ID] value = ½ç°Ì
-  //                                          //displayÉ½¼¨ÀìÍÑ
 
   vector<string> ListOfSchool;
   vector<int> score;
@@ -384,7 +379,6 @@ int main(){
         for(int J=0;J<NofJudge;J++){
           if(outputtree[J][I] != -999) cout << setw(7) << outputtree[J][I]+1 << "  ";
           else  cout << "         ";
-          //cout << scoretree[J][I] << " ";
         } //for
       cout << endl;
       } //for
