@@ -171,7 +171,7 @@ int KessenTouhyou(int NofSchool, int NofJudge, const vector<vector<int>> scoretr
     //cout
     if(flag_display == true){
       for(int J=0;J<NofSchool;J++){
-        if(flag_kari_1[J] == true){
+        if(flag_kessen[J] == true){
           cout << setw(17) << ListOfSchool[J] << " winning point: " << setw(2) << kachi_point[J] << endl;
         } //if
       } //for
@@ -208,7 +208,7 @@ int KessenTouhyou(int NofSchool, int NofJudge, const vector<vector<int>> scoretr
 
       if(flag_display == true){
         for(int J=0;J<NofSchool;J++){
-          if(flag_kari_1[J] == true){
+          if(flag_kessen[J] == true){
             cout << setw(17) << ListOfSchool[J] << " number of wins: " << setw(2) << kachi_kazu[J] << endl;
           } //if
         } //for
@@ -224,8 +224,19 @@ int KessenTouhyou(int NofSchool, int NofJudge, const vector<vector<int>> scoretr
         if(flag_display == true){
           cout << "number of wins mo douten desu!!!" << endl;
           cout << "ensou jun ga hayai dantai ga kachimasu (kanade's rule)" << endl;
+
+          bool flag_kessen2[NofSchool] = {};
           for(int J=0;J<NofSchool;J++){
-            if(flag_kari_1[J] == true){
+            if(flag_kessen[J] == true && kachi_kazu[J] == max_kachikazu){
+              flag_kessen2[J] = true;
+            } //if
+            else{
+              flag_kessen2[J] = false;
+            } //else
+          } //for
+
+          for(int J=0;J<NofSchool;J++){
+            if(flag_kessen2[J] == true){
               cout << setw(17) << ListOfSchool[J] << " ensou jun: " << setw(2) << J+1 << endl;
             } //if
           } //for
