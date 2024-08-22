@@ -13,6 +13,8 @@ using namespace std;
 
 const bool flag_display = false; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
 
+const int chair = 1; //審査員長は最上位に記載された審査員
+
 
 int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<int>> scoretree, const vector<bool> flag_kari_1, const int Nofkari1, const vector<string> ListOfSchool){
 
@@ -219,34 +221,36 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
         win_school = school_max_kachikazu;
       } //if
       //勝ち数１位が複数校の場合
-      //最も演奏順が早かった学校が勝利（これは私の価値観によるものです）
+      //審査員長が最上位とした団体を選出
       else{
+        bool flag_kessen2[NofSchool] = {};
+        for(int J=0;J<NofSchool;J++){
+          if(flag_kessen[J] == true && kachi_kazu[J] == max_kachikazu){
+            flag_kessen2[J] = true;
+          } //if
+          else{
+            flag_kessen2[J] = false;
+          } //else
+        } //for
+
         if(flag_display == true){
           cout << "number of wins mo douten desu!!!" << endl;
-          cout << "ensou jun ga hayai dantai ga kachimasu (kanade's rule)" << endl;
-
-          bool flag_kessen2[NofSchool] = {};
+          cout << "shinsa-incho no junni de kimemasu" << endl;
           for(int J=0;J<NofSchool;J++){
-            if(flag_kessen[J] == true && kachi_kazu[J] == max_kachikazu){
-              flag_kessen2[J] = true;
-            } //if
-            else{
-              flag_kessen2[J] = false;
-            } //else
-          } //for
-
-          for(int J=0;J<NofSchool;J++){
-            if(flag_kessen2[J] == true){
-              cout << setw(17) << ListOfSchool[J] << " ensou jun: " << setw(2) << J+1 << endl;
+            if(flag_kessen2[scoretree[chair-1][J]] == true){
+              cout << setw(17) << ListOfSchool[scoretree[chair-1][J]] << " shinsa-incho no junni: " << setw(2) << J+1 << endl;
             } //if
           } //for
         } //if
+
+        int best_junni = 999;
         for(int J=0;J<NofSchool;J++){
-          if(kachi_kazu[J] == max_kachikazu){
-            win_school = J;
-            break;
+          if(flag_kessen2[scoretree[chair-1][J]] == true && scoretree[chair-1][J] < best_junni){
+            best_junni = scoretree[chair-1][J];
           } //if
         } //for
+        win_school = best_junni;
+
       } //else
 
       //cout
@@ -328,6 +332,14 @@ int main(){
   } //while
 
   NofJudge = row_count-1;
+
+  if(NofJudge < chair){
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+    cout << "Chair's number is strange!" << endl;
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+    return -1;
+  } //if
+
   if(NofJudge%2 == 0){
     cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
     cout << "Number of Judges must be odd!" << endl;
