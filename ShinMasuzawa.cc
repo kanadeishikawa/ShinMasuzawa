@@ -11,7 +11,7 @@ using namespace std;
 #include <algorithm>
 #include <iomanip>
 
-const bool flag_display = false; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
+const bool flag_display = true; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
 
 const int chair = 1; //審査員長の順位は審査表の最も上に記載
 
@@ -456,11 +456,13 @@ int main(){
     int vote_tmp = -999;
     int count_tmp = 0;
     for(int J=0;J<NofSchool;J++){
+      //cout << "vote_sort[" << J << "] = " << vote_sort[J] << endl;
       if(vote_tmp != vote_sort[J]){
           kari_ni_vote[count_tmp] = vote_sort[J];
           vote_tmp = vote_sort[J];
+          //cout << "kari_ni_vote[" << count_tmp << "] = " << kari_ni_vote[count_tmp] << endl;
+          count_tmp ++;
       } //if
-      count_tmp ++;
     } //for
 
     //kari_ni_vote[0]: 仮の第１位の得票数

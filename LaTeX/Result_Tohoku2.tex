@@ -1,0 +1,188 @@
+\documentclass[11pt,a4paper,landscape,twoside,openany,english,uplatex]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathcomp}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{ascmac}
+\usepackage{makeidx}
+\usepackage[explicit]{titlesec}
+\usepackage{picture}
+\usepackage[dvipdfmx,usenames]{color}
+\usepackage{layout}
+\usepackage{here}
+\usepackage{afterpage}
+\usepackage{anyfontsize}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage{bxpapersize}
+\usepackage{multirow}
+\usepackage[samesize]{cancel}
+%\usepackage[style=phys,articletitle=false,biblabel=brackets,chaptertitle=false,pageranges=false]{biblatex}
+\usepackage[style=phys,biblabel=brackets]{biblatex}
+%\usepackage[style=phys,biblabel=brackets,chaptertitle=false,pageranges=false]{biblatex}
+%\usepackage[style=alphabetic,sorting=none]{biblatex}
+%\addbibresource{test.bib}
+
+%%
+\setlength{\parindent}{11pt}
+\setlength{\parskip}{2pt plus 2pt minus 1 pt}
+%%\topmargin	-14pt
+%%\topmargin	0pt
+%%\headheight 0pt
+%%\headsep 0pt
+\topmargin	-40pt
+\headheight 15pt
+\headsep 20pt
+%%\evensidemargin	-25pt
+%%\oddsidemargin	-25pt
+\evensidemargin	0pt
+\oddsidemargin	0pt
+%%\textwidth	466pt
+\footskip 35pt
+\textwidth	416pt
+%%\textheight	678pt
+\textheight	635pt
+%%
+\definecolor{star}{RGB}{255,143,189}
+\definecolor{milky}{RGB}{44,255,220}
+\definecolor{soleil}{RGB}{255,246,161}
+\definecolor{selene}{RGB}{214,180,254}
+%%
+\setcounter{tocdepth}{3}
+%
+%chapter
+\def\BIG{\fontsize{30pt}{30pt}\selectfont}
+\def\HUGE{\fontsize{30pt}{30pt}\selectfont}
+%\titleformat{\chapter}[frame]{\bfseries \LARGE \filleft}{\enspace Chapter $\mathbf{\thechapter}$ \enspace}{50pt}{#1}[\vspace{50pt}]
+\titleformat{\chapter}[display]{\normalfont}{\vspace{30pt}\filright\BIG Chapter \thechapter}{30pt}{\HUGE\filright{#1}}[\vspace{10pt}]
+
+\titlespacing{\chapter}{0pt}{3pt}{6pt}[0pt]
+%section
+\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}\thesection\hspace{5pt}{#1}}\titlerule}[\vspace{-10pt}]
+%subsection
+\titleformat{\subsection}[block]{\large}{}{0pt}{\thesubsection\hspace{3pt}#1}[\vspace{-5pt}]
+%subsubsection
+\titleformat{\subsubsection}[block]{\large}{}{0pt}{\hspace{3pt}#1}[\vspace{-5pt}]
+%%%
+
+%%%%%\titleformat{\chapter}[hang]{\Huge}{Chap. \thechapter}{14pt}{#1}[]
+%%%%%%section
+%%%%%%\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}\thesection\hspace{5pt}#1}\titlerule}[\vspace{-10pt}]
+%%%%%\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}#1}\titlerule}[\vspace{-10pt}]
+%%%%%%subsection
+%%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\thesubsection\hspace{3pt}#1}[\vspace{-5pt}]
+%%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\hspace{1pt}\textbf{#1}}[\vspace{-5pt}]
+%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\hspace{1pt}#1}[\vspace{-5pt}]
+%%%%%%%
+
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+\newcommand{\migi}{--\textgreater}  %-->
+\newcommand{\hidari}{\textless--}  %<--
+\newcommand{\hidarimigi}{\textless--\textgreater}  %<-->
+\newcommand{\dainari}{\textgreater}  %>
+\newcommand{\shonari}{\textless}  %<
+\newcommand{\etap}{$\eta '$~}  %etap
+\newcommand{\hydrogen}{$\mathrm{H_{2}}$~}  %etap
+%%
+
+\widebaselines
+
+\begin{document}
+
+2024年度　東北支部高校の部　非公式投票結果　※上位1/3を金、下位1/3を銅としています。
+%\begin{landscape}
+\begin{table}[h]
+ \centering
+ \begin{tabular}{r|l||rrrrrrrrrrrrr}
+  \hline
+  \multirow{3}{*}{出演順} & \multirow{3}{*}{団体名} & \multicolumn{12}{|c}{順位}  \\
+  \cline{3-14} %change
+    &  & 両津 & 中川 & 秋元 & 大原 & 寺井 & 本田 & 戸塚 & 麻里 & 磯鷲 & 擬宝珠 & 西郷 & 左近寺 \\
+    &  & 現地 & 配信 & 現地 & 配信 & 現地 & 配信 & 現地 & 現地 & 配信 & 現地   & 配信 & 現地    \\
+  \hline \hline
+   1 & 宮城県多賀城高等学校         &  1 &  1 &  1 &  1 &  1 &  1 &  1 &  1 &  1 &  1  &  1 &  1 \\
+   2 & 青森県立八戸北高等学校       &  2 &  2 &  2 &  2 &  2 &  2 &  2 &  2 &  2 &  2  &  2 &  2 \\
+   3 & 帝京安積高等学校             &  3 &  3 &  3 &  3 &  3 &  3 &  3 &  3 &  3 &  3  &  3 &  3 \\
+   4 & 秋田県立湯沢高等学校         &  4 &  4 &  4 &  4 &  4 &  4 &  4 &  4 &  4 &  4  &  4 &  4 \\
+   5 & 一関学院高等学校             &  5 &  5 &  5 &  5 &  5 &  5 &  5 &  5 &  5 &  5  &  5 &  5 \\
+   6 & 山形県立山形東高等学校       &  6 &  6 &  6 &  6 &  6 &  6 &  6 &  6 &  6 &  6  &  6 &  6 \\
+   7 & 福島県立いわき湯本高等学校   &  7 &  7 &  7 &  7 &  7 &  7 &  7 &  7 &  7 &  7  &  7 &  7 \\
+   8 & 山形県立致道館高等学校       &  8 &  8 &  8 &  8 &  8 &  8 &  8 &  8 &  8 &  8  &  8 &  8 \\
+  \hline
+   9 & 聖ウルスラ学院英智高等学校   &  9 &  9 &  9 &  9 &  9 &  9 &  9 &  9 &  9 &  9  &  9 &  9 \\
+  10 & 専修大学北上高等学校         & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10  & 10 & 10 \\
+  11 & 秋田県立秋田南高等学校       & 11 & 11 & 11 & 11 & 11 & 11 & 11 & 11 & 11 & 11  & 11 & 11 \\
+  12 & 青森県立弘前中央高等学校     & 12 & 12 & 12 & 12 & 12 & 12 & 12 & 12 & 12 & 12  & 12 & 12 \\
+  13 & 宮城県泉館山高等学校         & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13  & 13 & 13 \\
+  14 & 岩手県立黒沢尻北高等学校     & 14 & 14 & 14 & 14 & 14 & 14 & 14 & 14 & 14 & 14  & 14 & 14 \\
+  15 & 福島県立安積黎明高等学校     & 15 & 15 & 15 & 15 & 15 & 15 & 15 & 15 & 15 & 15  & 15 & 15 \\
+  16 & 青森山田中学校・高等学校     & 16 & 16 & 16 & 16 & 16 & 16 & 16 & 16 & 16 & 16  & 16 & 16 \\
+  \hline
+  17 & ノースアジア大学明桜高等学校 & 17 & 17 & 17 & 17 & 17 & 17 & 17 & 17 & 17 & 17  & 17 & 17 \\
+  18 & 創学館高等学校               & 18 & 18 & 18 & 18 & 18 & 18 & 18 & 18 & 18 & 18  & 18 & 18 \\
+  19 & 岩手県立盛岡第一高等学校     & 19 & 19 & 19 & 19 & 19 & 19 & 19 & 19 & 19 & 19  & 19 & 19 \\
+  20 & 福島県立磐城高等学校         & 20 & 20 & 20 & 20 & 20 & 20 & 20 & 20 & 20 & 20  & 20 & 20 \\
+  21 & 青森県立青森高等学校         & 21 & 21 & 21 & 21 & 21 & 21 & 21 & 21 & 21 & 21  & 21 & 21 \\
+  22 & 山形県立山形中央高等学校     & 22 & 22 & 22 & 22 & 22 & 22 & 22 & 22 & 22 & 22  & 22 & 22 \\
+  23 & 宮城県仙台向山高等学校       & 23 & 23 & 23 & 23 & 23 & 23 & 23 & 23 & 23 & 23  & 23 & 23 \\
+  24 & 秋田県立大曲高等学校         & 24 & 24 & 24 & 24 & 24 & 24 & 24 & 24 & 24 & 24  & 24 & 24 \\
+
+  \hline
+ \end{tabular}
+\end{table}
+%\end{landscape}
+
+\clearpage
+%\begin{landscape}
+\begin{table}[h]
+ \centering
+ \begin{tabular}{r|l||rrrrrrr|r|c}
+  \hline
+  \multirow{3}{*}{出演順} & \multirow{3}{*}{団体名} & \multicolumn{7}{|c|}{順位} & \multirow{3}{*}{\textbf{総合順位}} &  \multirow{3}{*}{\textbf{賞}} \\
+  \cline{3-9} %change
+    &  & 日暮 & 乙姫 & 屯田 & 星   & 汚野 & 海野 & 聖羅 & & \\
+    &  & 配信 & 現地 & 配信 & 現地 & 配信 & 現地 & 配信 & &  \\
+  \hline \hline
+   1 & 宮城県多賀城高等学校         &   1 &  1 &  1 &  1 &  1 &  1 &  1 &  1 & 金代表 \\
+   2 & 青森県立八戸北高等学校       &   2 &  2 &  2 &  2 &  2 &  2 &  2 &  2 & 金代表 \\
+   3 & 帝京安積高等学校             &   3 &  3 &  3 &  3 &  3 &  3 &  3 &  3 & 金代表 \\
+   4 & 秋田県立湯沢高等学校         &   4 &  4 &  4 &  4 &  4 &  4 &  4 &  4 & 金 \\
+   5 & 一関学院高等学校             &   5 &  5 &  5 &  5 &  5 &  5 &  5 &  5 & 金 \\
+   6 & 山形県立山形東高等学校       &   6 &  6 &  6 &  6 &  6 &  6 &  6 &  6 & 金 \\
+   7 & 福島県立いわき湯本高等学校   &   7 &  7 &  7 &  7 &  7 &  7 &  7 &  7 & 金 \\
+   8 & 山形県立致道館高等学校       &   8 &  8 &  8 &  8 &  8 &  8 &  8 &  8 & 金 \\
+  \hline                                                                      
+   9 & 聖ウルスラ学院英智高等学校   &   9 &  9 &  9 &  9 &  9 &  9 &  9 &  9 & 銀 \\
+  10 & 専修大学北上高等学校         &  10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 銀 \\
+  11 & 秋田県立秋田南高等学校       &  11 & 11 & 11 & 11 & 11 & 11 & 11 & 11 & 銀 \\
+  12 & 青森県立弘前中央高等学校     &  12 & 12 & 12 & 12 & 12 & 12 & 12 & 12 & 銀 \\
+  13 & 宮城県泉館山高等学校         &  13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 銀 \\
+  14 & 岩手県立黒沢尻北高等学校     &  14 & 14 & 14 & 14 & 14 & 14 & 14 & 14 & 銀 \\
+  15 & 福島県立安積黎明高等学校     &  15 & 15 & 15 & 15 & 15 & 15 & 15 & 15 & 銀 \\
+  16 & 青森山田中学校・高等学校     &  16 & 16 & 16 & 16 & 16 & 16 & 16 & 16 & 銀 \\
+  \hline                                                                      
+  17 & ノースアジア大学明桜高等学校 &  17 & 17 & 17 & 17 & 17 & 17 & 17 & 17 & 銅 \\
+  18 & 創学館高等学校               &  18 & 18 & 18 & 18 & 18 & 18 & 18 & 18 & 銅 \\
+  19 & 岩手県立盛岡第一高等学校     &  19 & 19 & 19 & 19 & 19 & 19 & 19 & 19 & 銅 \\
+  20 & 福島県立磐城高等学校         &  20 & 20 & 20 & 20 & 20 & 20 & 20 & 20 & 銅 \\
+  21 & 青森県立青森高等学校         &  21 & 21 & 21 & 21 & 21 & 21 & 21 & 21 & 銅 \\
+  22 & 山形県立山形中央高等学校     &  22 & 22 & 22 & 22 & 22 & 22 & 22 & 22 & 銅 \\
+  23 & 宮城県仙台向山高等学校       &  23 & 23 & 23 & 23 & 23 & 23 & 23 & 23 & 銅 \\
+  24 & 秋田県立大曲高等学校         &  24 & 24 & 24 & 24 & 24 & 24 & 24 & 24 & 銅 \\
+
+  \hline
+ \end{tabular}
+\end{table}
+%\end{landscape}
+
+
+\end{document}
+
