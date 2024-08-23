@@ -88,178 +88,197 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
     if(flag_display == true){
       cout << "  --> the winner is " << ListOfSchool[win_school] << endl;
     } //if
-  } //if
+  } //if count_max_kachi == 1
 
   //もし勝ちポイントが同点で並んだ場合、勝ちポイント１位の学校だけで勝負する
   else if(count_max_kachi > 1){
-    if(flag_display == true){
-      cout << "winning points ga douten desu!" << endl;
-      cout << "sorera no dantai nomi de saido hikaku shimasu." << endl;
-    } //if
 
-    bool flag_kessen[NofSchool] = {};
-    for(int J=0;J<NofSchool;J++){
-      if(flag_kari_1[J] == true && kachi_point[J] == max_kachi_point){
-        flag_kessen[J] = true;
+    int initial_count_max_kachi = count_max_kachi;
+    bool flag_saido = true;
+    while(flag_saido == true){
+
+      if(flag_display == true){
+        cout << "winning points ga douten desu!" << endl;
+        cout << "sorera no dantai nomi de saido hikaku shimasu." << endl;
       } //if
-      else{
-        flag_kessen[J] = false;
-      } //else
-    } //for
-  
-    aka = -9;// 対戦カード
-    ao = -9;// 対戦カード
 
-    for(int J=0;J<NofSchool;J++){
-      kachi_point[J] = 0;
-      kachi_kazu[J] = 0;
-    } //for
-
-    for(int J=0;J<NofSchool;J++){
-      if(flag_kessen[J]==false) continue;
-
-      for(int I=J+1;I<NofSchool;I++){
-        if(flag_kessen[I]==false) continue;
-
-        aka = J;
-        ao  = I;
-        //ここまでで、対戦組み合わせ赤vs青が決定
-        //ここから、多数決での対戦
-        int NofWin_aka = 0; //赤の勝利数。青の勝利数は、NofJudge - Nofwin_akaとなる。
-        int Junni_aka, Junni_ao;
-
-        for(int J=0;J<NofJudge;J++){
-          for(int I=0;I<NofSchool;I++){
-            if(scoretree[J][I] == aka) Junni_aka = I;
-            if(scoretree[J][I] == ao) Junni_ao = I;
-          } //for NofSchool
-          if(Junni_aka < Junni_ao){
-            NofWin_aka ++;
-            kachi_kazu[aka] ++;
-          } //if
-          else{
-            kachi_kazu[ao] ++;
-          } //else
-        } //for NofJudge
-
-        //赤の勝利数が多ければ、赤の勝ち。青の勝利数が多ければ、青の勝ち
-        if(NofWin_aka > NofJudge/2){
-          kachi_point[aka] ++;
+      bool flag_kessen[NofSchool] = {};
+      for(int J=0;J<NofSchool;J++){
+        if(flag_kari_1[J] == true && kachi_point[J] == max_kachi_point){
+          flag_kessen[J] = true;
         } //if
         else{
-          kachi_point[ao] ++;
+          flag_kessen[J] = false;
         } //else
-
-      } //for I
-    } //for J
-
-    //勝ちポイントが最も多い学校が決戦投票の勝者
-    int max_kachi_point = 0;
-    int count_max_kachi = 0;
-    int win_school = -1;
-    for(int J=0;J<NofSchool;J++){
-      if(kachi_point[J]>max_kachi_point){
-        max_kachi_point = kachi_point[J];
-      } //if
-    } //for
-
-    for(int J=0;J<NofSchool;J++){
-      if(kachi_point[J] == max_kachi_point){
-        count_max_kachi ++;
-        win_school = J;
-      } //if
-    } //for
-
-    //cout
-    if(flag_display == true){
-      for(int J=0;J<NofSchool;J++){
-        if(flag_kessen[J] == true){
-          cout << setw(17) << ListOfSchool[J] << " winning point: " << setw(2) << kachi_point[J] << endl;
-        } //if
-      } //for
-    } //if
-
-
-    //returnする値
-    if(count_max_kachi == 1){
-      val = win_school;
-      if(flag_display == true){
-        cout << "  --> the winner is " << ListOfSchool[win_school] << endl;
-      } //if
-    } //if
-
-    //それでも勝ちポイント１位が複数の場合、勝ち数が最も大きい学校が勝利
-    else if(count_max_kachi > 1){
-
-      if(flag_display == true){
-        cout << "mata douten desu!!" << endl;
-        cout << "number of wins ga ooi dantai ga kachi desu" << endl;
-      } //if
-      int school_max_kachikazu = -1;
-      int max_kachikazu = -1;
-      int number_of_max_kachikazu = 0;
-      for(int J=0;J<NofSchool;J++){
-        if(kachi_kazu[J] > max_kachikazu) max_kachikazu = kachi_kazu[J];
-      } //for
-      for(int J=0;J<NofSchool;J++){
-        if(kachi_kazu[J] == max_kachikazu){
-          number_of_max_kachikazu ++;
-          school_max_kachikazu = J;
-        } //if
       } //for
 
-      if(flag_display == true){
-        for(int J=0;J<NofSchool;J++){
-          if(flag_kessen[J] == true){
-            cout << setw(17) << ListOfSchool[J] << " number of wins: " << setw(2) << kachi_kazu[J] << endl;
-          } //if
-        } //for
-      } //if
+      for(int J=0;J<NofSchool;J++){
+        kachi_point[J] = 0; //initialize
+        kachi_kazu[J] = 0; //initialize
+      } //for
+    
+      aka = -9;// 対戦カード
+      ao = -9;// 対戦カード
 
-      //勝ち数１位が１校の場合
-      if(number_of_max_kachikazu == 1){
-        win_school = school_max_kachikazu;
-      } //if
-      //勝ち数１位が複数校の場合
-      //審査員長が最上位とした団体を選出
-      else{
-        bool flag_kessen2[NofSchool] = {};
-        for(int J=0;J<NofSchool;J++){
-          if(flag_kessen[J] == true && kachi_kazu[J] == max_kachikazu){
-            flag_kessen2[J] = true;
+      for(int J=0;J<NofSchool;J++){
+        if(flag_kessen[J]==false) continue;
+  
+        for(int I=J+1;I<NofSchool;I++){
+          if(flag_kessen[I]==false) continue;
+  
+          aka = J;
+          ao  = I;
+          //ここまでで、対戦組み合わせ赤vs青が決定
+          //ここから、多数決での対戦
+          int NofWin_aka = 0; //赤の勝利数。青の勝利数は、NofJudge - Nofwin_akaとなる。
+          int Junni_aka, Junni_ao;
+  
+          for(int J=0;J<NofJudge;J++){
+            for(int I=0;I<NofSchool;I++){
+              if(scoretree[J][I] == aka) Junni_aka = I;
+              if(scoretree[J][I] == ao) Junni_ao = I;
+            } //for NofSchool
+            if(Junni_aka < Junni_ao){
+              NofWin_aka ++;
+              kachi_kazu[aka] ++;
+            } //if
+            else{
+              kachi_kazu[ao] ++;
+            } //else
+          } //for NofJudge
+  
+          //赤の勝利数が多ければ、赤の勝ち。青の勝利数が多ければ、青の勝ち
+          if(NofWin_aka > NofJudge/2){
+            kachi_point[aka] ++;
           } //if
           else{
-            flag_kessen2[J] = false;
+            kachi_point[ao] ++;
           } //else
-        } //for
+  
+        } //for I
+      } //for J
 
-        if(flag_display == true){
-          cout << "number of wins mo douten desu!!!" << endl;
-          cout << "shinsa-incho (Judge " << chair << ") no junni de kimemasu" << endl;
-          for(int J=0;J<NofSchool;J++){
-            if(flag_kessen2[scoretree[chair-1][J]] == true){
-              cout << setw(17) << ListOfSchool[scoretree[chair-1][J]] << " shinsa-incho no junni: " << setw(2) << J+1 << endl;
-            } //if
-          } //for
+      //勝ちポイントが最も多い学校が決戦投票の勝者
+      max_kachi_point = 0;
+      count_max_kachi = 0;
+      int win_school = -1;
+      for(int J=0;J<NofSchool;J++){
+        if(kachi_point[J]>max_kachi_point){
+          max_kachi_point = kachi_point[J]; //max_kachi_point更新
         } //if
+      } //for
 
-        int best_junni = 999;
-        for(int J=0;J<NofSchool;J++){
-          if(flag_kessen2[scoretree[chair-1][J]] == true && scoretree[chair-1][J] < best_junni){
-            best_junni = scoretree[chair-1][J];
-          } //if
-        } //for
-        win_school = best_junni;
-
-      } //else
+      for(int J=0;J<NofSchool;J++){
+        if(kachi_point[J] == max_kachi_point){
+          count_max_kachi ++; //count_max_kachi更新
+          win_school = J;
+        } //if
+      } //for
 
       //cout
       if(flag_display == true){
-        cout << "  --> the winner is " << ListOfSchool[win_school] << endl;
+        for(int J=0;J<NofSchool;J++){
+          if(flag_kessen[J] == true){
+            cout << setw(17) << ListOfSchool[J] << " winning point: " << setw(2) << kachi_point[J] << endl;
+          } //if
+        } //for
       } //if
 
-      val = win_school;
-    } //else if
+      //returnする値
+      if(count_max_kachi == 1){
+        flag_saido = false; //whileはもう繰り返さない
+        val = win_school;
+        if(flag_display == true){
+          cout << "  --> the winner is " << ListOfSchool[win_school] << endl;
+        } //if
+      } //if
+
+      //再度の総当たりの１位が複数校いるけど、脱落校もいる場合
+      else if(count_max_kachi > 1 && count_max_kachi != initial_count_max_kachi){
+
+        flag_saido = true; //whileを再度繰り返す
+        initial_count_max_kachi = count_max_kachi;
+
+      } //else if count_max_kachi > 1 && count_max_kachi != initial_count_max_kachi
+
+      //再度の総当たりの１位が複数校いて、脱落校がいない場合
+      else if(count_max_kachi > 1 && count_max_kachi == initial_count_max_kachi){
+
+        flag_saido = false; //whileはもう繰り返さない
+
+        if(flag_display == true){
+          cout << "mata douten desu!!" << endl;
+          cout << "number of wins ga ooi dantai ga kachi desu" << endl;
+        } //if
+
+        //勝ち数が最も大きい学校が勝利
+        int school_max_kachikazu = -1;
+        int max_kachikazu = -1;
+        int number_of_max_kachikazu = 0;
+        for(int J=0;J<NofSchool;J++){
+          if(kachi_kazu[J] > max_kachikazu) max_kachikazu = kachi_kazu[J];
+        } //for
+        for(int J=0;J<NofSchool;J++){
+          if(kachi_kazu[J] == max_kachikazu){
+            number_of_max_kachikazu ++;
+            school_max_kachikazu = J;
+          } //if
+        } //for
+  
+        if(flag_display == true){
+          for(int J=0;J<NofSchool;J++){
+            if(flag_kessen[J] == true){
+              cout << setw(17) << ListOfSchool[J] << " number of wins: " << setw(2) << kachi_kazu[J] << endl;
+            } //if
+          } //for
+        } //if
+  
+        //勝ち数１位が１校の場合
+        if(number_of_max_kachikazu == 1){
+          win_school = school_max_kachikazu;
+        } //if
+        //勝ち数１位が複数校の場合
+        //審査員長が最上位とした団体を選出
+        else{
+          bool flag_kessen2[NofSchool] = {};
+          for(int J=0;J<NofSchool;J++){
+            if(flag_kessen[J] == true && kachi_kazu[J] == max_kachikazu){
+              flag_kessen2[J] = true;
+            } //if
+            else{
+              flag_kessen2[J] = false;
+            } //else
+          } //for
+  
+          if(flag_display == true){
+            cout << "number of wins mo douten desu!!!" << endl;
+            cout << "shinsa-incho (Judge " << chair << ") no junni de kimemasu" << endl;
+            for(int J=0;J<NofSchool;J++){
+              if(flag_kessen2[scoretree[chair-1][J]] == true){
+                cout << setw(17) << ListOfSchool[scoretree[chair-1][J]] << " shinsa-incho no junni: " << setw(2) << J+1 << endl;
+              } //if
+            } //for
+          } //if
+  
+          int best_junni = 999;
+          for(int J=0;J<NofSchool;J++){
+            if(flag_kessen2[scoretree[chair-1][J]] == true && scoretree[chair-1][J] < best_junni){
+              best_junni = scoretree[chair-1][J];
+            } //if
+          } //for
+          win_school = best_junni;
+  
+        } //else
+  
+        //cout
+        if(flag_display == true){
+          cout << "  --> the winner is " << ListOfSchool[win_school] << endl;
+        } //if
+  
+        val = win_school;
+
+      } //else if count_max_kachi > 1 && count_max_kachi == initial_count_max_kachi
+    } //while flag_saido == true
 
   } //else if (count_max_kachi > 1)
 
