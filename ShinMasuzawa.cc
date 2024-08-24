@@ -12,6 +12,7 @@ using namespace std;
 #include <iomanip>
 
 const bool flag_display = true; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
+const char input_file[40] = "./infiles/score_Tohoku_2024.dat"; //順位表のファイル名
 
 const int chair = 1; //審査員長の順位は審査表の最も上に記載
 
@@ -290,8 +291,7 @@ int main(){
 
 
   //read file
-  //ifstream ifs("./infiles/score_sample.dat");
-  ifstream ifs("./infiles/score_Tohoku_2024.dat");
+  ifstream ifs(input_file);
   if (ifs.fail()) {
      cerr << "Cannot open file\n";
      exit(0);
