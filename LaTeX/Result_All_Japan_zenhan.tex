@@ -1,0 +1,153 @@
+\documentclass[11pt,a4paper,landscape,twoside,openany,english,uplatex]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathcomp}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{ascmac}
+\usepackage{makeidx}
+\usepackage[explicit]{titlesec}
+\usepackage{picture}
+\usepackage[dvipdfmx,usenames]{color}
+\usepackage{layout}
+\usepackage{here}
+\usepackage{afterpage}
+\usepackage{anyfontsize}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage{bxpapersize}
+\usepackage{multirow}
+\usepackage[samesize]{cancel}
+%\usepackage[style=phys,articletitle=false,biblabel=brackets,chaptertitle=false,pageranges=false]{biblatex}
+\usepackage[style=phys,biblabel=brackets]{biblatex}
+%\usepackage[style=phys,biblabel=brackets,chaptertitle=false,pageranges=false]{biblatex}
+%\usepackage[style=alphabetic,sorting=none]{biblatex}
+%\addbibresource{test.bib}
+
+%%
+\setlength{\parindent}{11pt}
+\setlength{\parskip}{2pt plus 2pt minus 1 pt}
+%%\topmargin	-14pt
+%%\topmargin	0pt
+%%\headheight 0pt
+%%\headsep 0pt
+\topmargin	-40pt
+\headheight 15pt
+\headsep 20pt
+%%\evensidemargin	-25pt
+%%\oddsidemargin	-25pt
+\evensidemargin	0pt
+\oddsidemargin	0pt
+%%\textwidth	466pt
+\footskip 35pt
+\textwidth	416pt
+%%\textheight	678pt
+\textheight	635pt
+%%
+\definecolor{star}{RGB}{255,143,189}
+\definecolor{milky}{RGB}{44,255,220}
+\definecolor{soleil}{RGB}{255,246,161}
+\definecolor{selene}{RGB}{214,180,254}
+%%
+\setcounter{tocdepth}{3}
+%
+%chapter
+\def\BIG{\fontsize{30pt}{30pt}\selectfont}
+\def\HUGE{\fontsize{30pt}{30pt}\selectfont}
+%\titleformat{\chapter}[frame]{\bfseries \LARGE \filleft}{\enspace Chapter $\mathbf{\thechapter}$ \enspace}{50pt}{#1}[\vspace{50pt}]
+\titleformat{\chapter}[display]{\normalfont}{\vspace{30pt}\filright\BIG Chapter \thechapter}{30pt}{\HUGE\filright{#1}}[\vspace{10pt}]
+
+\titlespacing{\chapter}{0pt}{3pt}{6pt}[0pt]
+%section
+\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}\thesection\hspace{5pt}{#1}}\titlerule}[\vspace{-10pt}]
+%subsection
+\titleformat{\subsection}[block]{\large}{}{0pt}{\thesubsection\hspace{3pt}#1}[\vspace{-5pt}]
+%subsubsection
+\titleformat{\subsubsection}[block]{\large}{}{0pt}{\hspace{3pt}#1}[\vspace{-5pt}]
+%%%
+
+%%%%%\titleformat{\chapter}[hang]{\Huge}{Chap. \thechapter}{14pt}{#1}[]
+%%%%%%section
+%%%%%%\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}\thesection\hspace{5pt}#1}\titlerule}[\vspace{-10pt}]
+%%%%%\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}#1}\titlerule}[\vspace{-10pt}]
+%%%%%%subsection
+%%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\thesubsection\hspace{3pt}#1}[\vspace{-5pt}]
+%%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\hspace{1pt}\textbf{#1}}[\vspace{-5pt}]
+%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\hspace{1pt}#1}[\vspace{-5pt}]
+%%%%%%%
+
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+\newcommand{\migi}{--\textgreater}  %-->
+\newcommand{\hidari}{\textless--}  %<--
+\newcommand{\hidarimigi}{\textless--\textgreater}  %<-->
+\newcommand{\dainari}{\textgreater}  %>
+\newcommand{\shonari}{\textless}  %<
+\newcommand{\etap}{$\eta '$~}  %etap
+\newcommand{\hydrogen}{$\mathrm{H_{2}}$~}  %etap
+%%
+
+\widebaselines
+
+\begin{document}
+
+2024年度　全国大会高校の部　前半　投票結果　※上位1/3を金、下位1/3を銅としています。
+%\begin{landscape}
+\begin{table}[h]
+ \centering
+ \scalebox{0.9}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{tabular}{r|l|rrr|r|c|c}
+  \hline
+  \multirow{2}{*}{出演順} & \multirow{2}{*}{団体名} & \multicolumn{3}{|c|}{順位} & \multirow{2}{*}{\textbf{総合順位}} &  \multirow{2}{*}{\textbf{賞}} & \multirow{2}{*}{\textbf{実際の賞}}\\
+  \cline{3-5}
+  & & かなで & ここな & ときこ & & & \\
+  \hline \hline
+  9 & 千葉県立幕張総合高等学校	 & 9 & 1 & 1 & 1 & 金 &  \\
+ 11 & 岡山学芸館高等学校	 & 11 & 2 & 2 & 2 & 金 &  \\
+  6 & 精華女子高等学校 & 6 & 4 & 3 & 3 & 金 &  \\
+ 15 & 聖ウルスラ学院英智高等学校 & 1 & 8 & 6 & 4 & 金 &  \\
+  2 & 札幌日本大学高等学校	 & 2 & 11 & 15 & 5 & 金 &  \\
+  \hline
+  3 & 金沢学院大学附属高等学校	 & 3 & 12 & 4 & 6 & 銀 &  \\
+  8 & 香川県立坂出高等学校 & 8 & 3 & 10 & 7 & 銀 &  \\
+  4 & 埼玉県立伊奈学園総合高等学校	 & 4 & 5 & 13 & 8 & 銀 &  \\
+  5 & 鹿児島県立松陽高等学校	 & 5 & 6 & 12 & 9 & 銀 &  \\
+ 14 & 春日部共栄高等学校	 & 14 & 7 & 5 & 10 & 銀 &  \\
+  \hline
+ 12 & 浜松聖星高等学校	 & 12 & 10 & 7 & 11 & 銅 &  \\
+ 13 & 八王子学園八王子高等学校	 & 13 & 9 & 8 & 12 & 銅 &  \\
+ 10 & 大阪桐蔭高等学校	 & 10 & 13 & 9 & 13 & 銅 &  \\
+  1 & 福島県立磐城高等学校	 & 15 & 14 & 11 & 14 & 銅 &  \\
+  7 & 愛知工業大学名電高等学校	 & 7 & 15 & 14 & 15 & 銅 &  \\
+  \hline
+ \end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ }
+\end{table}
+%\end{landscape}
+
+%%% 福島県立磐城高等学校	
+%%% 札幌日本大学高等学校	
+%%% 金沢学院大学附属高等学校	
+%%% 埼玉県立伊奈学園総合高等学校	
+%%% 鹿児島県立松陽高等学校	
+%%% 精華女子高等学校	
+%%% 愛知工業大学名電高等学校	
+%%% 香川県立坂出高等学校
+%%% 千葉県立幕張総合高等学校	
+%%% 大阪桐蔭高等学校	
+%%% 岡山学芸館高等学校	
+%%% 浜松聖星高等学校	
+%%% 八王子学園八王子高等学校	
+%%% 春日部共栄高等学校	
+%%% 聖ウルスラ学院英智高等学校
+
+\end{document}
+

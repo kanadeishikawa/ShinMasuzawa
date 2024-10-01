@@ -11,16 +11,19 @@ using namespace std;
 #include <algorithm>
 #include <iomanip>
 
-const bool flag_display = true; //true¤Ë¤¹¤ë¤È½¸·×²áÄø¤òÉ½¼¨¤·¤Ş¤¹¡£false¤Ë¤¹¤ë¤ÈÁí¹ç½ç°Ì¤Î¤ßÉ½¼¨¤·¤Ş¤¹¡£
-const char input_file[40] = "./infiles/score_Tohoku_2024.dat"; //½ç°ÌÉ½¤Î¥Õ¥¡¥¤¥ëÌ¾
+const bool flag_display = false; //trueã«ã™ã‚‹ã¨é›†è¨ˆéç¨‹ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚falseã«ã™ã‚‹ã¨ç·åˆé †ä½ã®ã¿è¡¨ç¤ºã—ã¾ã™ã€‚
+//const char input_file[50] = "./infiles/score_All_Japan_zenhan_2024.dat"; //é †ä½è¡¨ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+//const char output_file[50] = "./outfiles/output_All_Japan_zenhan_2024.txt"; //å‡ºåŠ›å…ˆã®ãƒ•ã‚¡ã‚¤ãƒ«å
+const char input_file[50] = "./infiles/score_All_Japan_kouhan_2024.dat"; //é †ä½è¡¨ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+const char output_file[50] = "./outfiles/output_All_Japan_kouhan_2024.txt"; //å‡ºåŠ›å…ˆã®ãƒ•ã‚¡ã‚¤ãƒ«å
 
-const int chair = 1; //¿³ºº°÷Ä¹¤Î½ç°Ì¤Ï¿³ººÉ½¤ÎºÇ¤â¾å¤Ëµ­ºÜ
+const int chair = 1; //å¯©æŸ»å“¡é•·ã®é †ä½ã¯å¯©æŸ»è¡¨ã®æœ€ã‚‚ä¸Šã«è¨˜è¼‰
 
 
-int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<int>> scoretree, const vector<bool> flag_kari_1, const int Nofkari1, const vector<string> ListOfSchool){
+int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<int>> scoretree, const vector<bool> flag_kari_1, const int Nofkari1, const vector<string> ListOfSchool, const vector<string> name){
 
-  int aka = -9;// ÂĞÀï¥«¡¼¥É
-  int ao = -9;// ÂĞÀï¥«¡¼¥É
+  int aka = -9;// å¯¾æˆ¦ã‚«ãƒ¼ãƒ‰
+  int ao = -9;// å¯¾æˆ¦ã‚«ãƒ¼ãƒ‰
   int kachi_point[NofSchool] = {};
   int kachi_kazu[NofSchool] = {};
 
@@ -33,9 +36,9 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
 
       aka = J;
       ao  = I;
-      //¤³¤³¤Ş¤Ç¤Ç¡¢ÂĞÀïÁÈ¤ß¹ç¤ï¤»ÀÖvsÀÄ¤¬·èÄê
-      //¤³¤³¤«¤é¡¢Â¿¿ô·è¤Ç¤ÎÂĞÀï
-      int NofWin_aka = 0; //ÀÖ¤Î¾¡Íø¿ô¡£ÀÄ¤Î¾¡Íø¿ô¤Ï¡¢NofJudge - Nofwin_aka¤È¤Ê¤ë¡£
+      //ã“ã“ã¾ã§ã§ã€å¯¾æˆ¦çµ„ã¿åˆã‚ã›èµ¤vsé’ãŒæ±ºå®š
+      //ã“ã“ã‹ã‚‰ã€å¤šæ•°æ±ºã§ã®å¯¾æˆ¦
+      int NofWin_aka = 0; //èµ¤ã®å‹åˆ©æ•°ã€‚é’ã®å‹åˆ©æ•°ã¯ã€NofJudge - Nofwin_akaã¨ãªã‚‹ã€‚
       int Junni_aka, Junni_ao;
 
       for(int J=0;J<NofJudge;J++){
@@ -46,7 +49,7 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
         if(Junni_aka < Junni_ao) NofWin_aka ++;
       } //for NofJudge
 
-      //ÀÖ¤Î¾¡Íø¿ô¤¬Â¿¤±¤ì¤Ğ¡¢ÀÖ¤Î¾¡¤Á¡£ÀÄ¤Î¾¡Íø¿ô¤¬Â¿¤±¤ì¤Ğ¡¢ÀÄ¤Î¾¡¤Á
+      //èµ¤ã®å‹åˆ©æ•°ãŒå¤šã‘ã‚Œã°ã€èµ¤ã®å‹ã¡ã€‚é’ã®å‹åˆ©æ•°ãŒå¤šã‘ã‚Œã°ã€é’ã®å‹ã¡
       if(NofWin_aka > NofJudge/2){
         kachi_point[aka] ++;
       } //if
@@ -57,7 +60,7 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
     } //for I
   } //for J
 
-  //¾¡¤Á¥İ¥¤¥ó¥È¤¬ºÇ¤âÂ¿¤¤³Ø¹»¤¬·èÀïÅêÉ¼¤Î¾¡¼Ô
+  //å‹ã¡ãƒã‚¤ãƒ³ãƒˆãŒæœ€ã‚‚å¤šã„å­¦æ ¡ãŒæ±ºæˆ¦æŠ•ç¥¨ã®å‹è€…
   int max_kachi_point = -1;
   int count_max_kachi = 0;
   int win_school = -1;
@@ -83,7 +86,7 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
     } //for
   } //if
 
-  //return¤¹¤ëÃÍ
+  //returnã™ã‚‹å€¤
   if(count_max_kachi == 1){
     val = win_school;
     if(flag_display == true){
@@ -91,7 +94,7 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
     } //if
   } //if count_max_kachi == 1
 
-  //¤â¤·¾¡¤Á¥İ¥¤¥ó¥È¤¬Æ±ÅÀ¤ÇÊÂ¤ó¤À¾ì¹ç¡¢¾¡¤Á¥İ¥¤¥ó¥È£±°Ì¤Î³Ø¹»¤À¤±¤Ç¾¡Éé¤¹¤ë
+  //ã‚‚ã—å‹ã¡ãƒã‚¤ãƒ³ãƒˆãŒåŒç‚¹ã§ä¸¦ã‚“ã å ´åˆã€å‹ã¡ãƒã‚¤ãƒ³ãƒˆï¼‘ä½ã®å­¦æ ¡ã ã‘ã§å‹è² ã™ã‚‹
   else if(count_max_kachi > 1){
 
     int initial_count_max_kachi = count_max_kachi;
@@ -118,8 +121,8 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
         kachi_kazu[J] = 0; //initialize
       } //for
     
-      aka = -9;// ÂĞÀï¥«¡¼¥É
-      ao = -9;// ÂĞÀï¥«¡¼¥É
+      aka = -9;// å¯¾æˆ¦ã‚«ãƒ¼ãƒ‰
+      ao = -9;// å¯¾æˆ¦ã‚«ãƒ¼ãƒ‰
 
       for(int J=0;J<NofSchool;J++){
         if(flag_kessen[J]==false) continue;
@@ -129,9 +132,9 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
   
           aka = J;
           ao  = I;
-          //¤³¤³¤Ş¤Ç¤Ç¡¢ÂĞÀïÁÈ¤ß¹ç¤ï¤»ÀÖvsÀÄ¤¬·èÄê
-          //¤³¤³¤«¤é¡¢Â¿¿ô·è¤Ç¤ÎÂĞÀï
-          int NofWin_aka = 0; //ÀÖ¤Î¾¡Íø¿ô¡£ÀÄ¤Î¾¡Íø¿ô¤Ï¡¢NofJudge - Nofwin_aka¤È¤Ê¤ë¡£
+          //ã“ã“ã¾ã§ã§ã€å¯¾æˆ¦çµ„ã¿åˆã‚ã›èµ¤vsé’ãŒæ±ºå®š
+          //ã“ã“ã‹ã‚‰ã€å¤šæ•°æ±ºã§ã®å¯¾æˆ¦
+          int NofWin_aka = 0; //èµ¤ã®å‹åˆ©æ•°ã€‚é’ã®å‹åˆ©æ•°ã¯ã€NofJudge - Nofwin_akaã¨ãªã‚‹ã€‚
           int Junni_aka, Junni_ao;
   
           for(int J=0;J<NofJudge;J++){
@@ -148,7 +151,7 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
             } //else
           } //for NofJudge
   
-          //ÀÖ¤Î¾¡Íø¿ô¤¬Â¿¤±¤ì¤Ğ¡¢ÀÖ¤Î¾¡¤Á¡£ÀÄ¤Î¾¡Íø¿ô¤¬Â¿¤±¤ì¤Ğ¡¢ÀÄ¤Î¾¡¤Á
+          //èµ¤ã®å‹åˆ©æ•°ãŒå¤šã‘ã‚Œã°ã€èµ¤ã®å‹ã¡ã€‚é’ã®å‹åˆ©æ•°ãŒå¤šã‘ã‚Œã°ã€é’ã®å‹ã¡
           if(NofWin_aka > NofJudge/2){
             kachi_point[aka] ++;
           } //if
@@ -159,19 +162,19 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
         } //for I
       } //for J
 
-      //¾¡¤Á¥İ¥¤¥ó¥È¤¬ºÇ¤âÂ¿¤¤³Ø¹»¤¬·èÀïÅêÉ¼¤Î¾¡¼Ô
+      //å‹ã¡ãƒã‚¤ãƒ³ãƒˆãŒæœ€ã‚‚å¤šã„å­¦æ ¡ãŒæ±ºæˆ¦æŠ•ç¥¨ã®å‹è€…
       max_kachi_point = 0;
       count_max_kachi = 0;
       int win_school = -1;
       for(int J=0;J<NofSchool;J++){
         if(kachi_point[J]>max_kachi_point){
-          max_kachi_point = kachi_point[J]; //max_kachi_point¹¹¿·
+          max_kachi_point = kachi_point[J]; //max_kachi_pointæ›´æ–°
         } //if
       } //for
 
       for(int J=0;J<NofSchool;J++){
         if(kachi_point[J] == max_kachi_point){
-          count_max_kachi ++; //count_max_kachi¹¹¿·
+          count_max_kachi ++; //count_max_kachiæ›´æ–°
           win_school = J;
         } //if
       } //for
@@ -185,34 +188,34 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
         } //for
       } //if
 
-      //return¤¹¤ëÃÍ
+      //returnã™ã‚‹å€¤
       if(count_max_kachi == 1){
-        flag_saido = false; //while¤Ï¤â¤¦·«¤êÊÖ¤µ¤Ê¤¤
+        flag_saido = false; //whileã¯ã‚‚ã†ç¹°ã‚Šè¿”ã•ãªã„
         val = win_school;
         if(flag_display == true){
           cout << "  --> the winner is " << ListOfSchool[win_school] << endl;
         } //if
       } //if
 
-      //ºÆÅÙ¤ÎÁíÅö¤¿¤ê¤Î£±°Ì¤¬Ê£¿ô¹»¤¤¤ë¤±¤É¡¢Ã¦Íî¹»¤â¤¤¤ë¾ì¹ç
+      //å†åº¦ã®ç·å½“ãŸã‚Šã®ï¼‘ä½ãŒè¤‡æ•°æ ¡ã„ã‚‹ã‘ã©ã€è„±è½æ ¡ã‚‚ã„ã‚‹å ´åˆ
       else if(count_max_kachi > 1 && count_max_kachi != initial_count_max_kachi){
 
-        flag_saido = true; //while¤òºÆÅÙ·«¤êÊÖ¤¹
+        flag_saido = true; //whileã‚’å†åº¦ç¹°ã‚Šè¿”ã™
         initial_count_max_kachi = count_max_kachi;
 
       } //else if count_max_kachi > 1 && count_max_kachi != initial_count_max_kachi
 
-      //ºÆÅÙ¤ÎÁíÅö¤¿¤ê¤Î£±°Ì¤¬Ê£¿ô¹»¤¤¤Æ¡¢Ã¦Íî¹»¤¬¤¤¤Ê¤¤¾ì¹ç
+      //å†åº¦ã®ç·å½“ãŸã‚Šã®ï¼‘ä½ãŒè¤‡æ•°æ ¡ã„ã¦ã€è„±è½æ ¡ãŒã„ãªã„å ´åˆ
       else if(count_max_kachi > 1 && count_max_kachi == initial_count_max_kachi){
 
-        flag_saido = false; //while¤Ï¤â¤¦·«¤êÊÖ¤µ¤Ê¤¤
+        flag_saido = false; //whileã¯ã‚‚ã†ç¹°ã‚Šè¿”ã•ãªã„
 
         if(flag_display == true){
           cout << "mata douten desu!!" << endl;
           cout << "number of wins ga ooi dantai ga kachi desu" << endl;
         } //if
 
-        //¾¡¤Á¿ô¤¬ºÇ¤âÂç¤­¤¤³Ø¹»¤¬¾¡Íø
+        //å‹ã¡æ•°ãŒæœ€ã‚‚å¤§ãã„å­¦æ ¡ãŒå‹åˆ©
         int school_max_kachikazu = -1;
         int max_kachikazu = -1;
         int number_of_max_kachikazu = 0;
@@ -234,12 +237,12 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
           } //for
         } //if
   
-        //¾¡¤Á¿ô£±°Ì¤¬£±¹»¤Î¾ì¹ç
+        //å‹ã¡æ•°ï¼‘ä½ãŒï¼‘æ ¡ã®å ´åˆ
         if(number_of_max_kachikazu == 1){
           win_school = school_max_kachikazu;
         } //if
-        //¾¡¤Á¿ô£±°Ì¤¬Ê£¿ô¹»¤Î¾ì¹ç
-        //¿³ºº°÷Ä¹¤¬ºÇ¾å°Ì¤È¤·¤¿ÃÄÂÎ¤òÁª½Ğ
+        //å‹ã¡æ•°ï¼‘ä½ãŒè¤‡æ•°æ ¡ã®å ´åˆ
+        //å¯©æŸ»å“¡é•·ãŒæœ€ä¸Šä½ã¨ã—ãŸå›£ä½“ã‚’é¸å‡º
         else{
           bool flag_kessen2[NofSchool] = {};
           for(int J=0;J<NofSchool;J++){
@@ -253,7 +256,7 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
   
           if(flag_display == true){
             cout << "number of wins mo douten desu!!!" << endl;
-            cout << "shinsa-incho (Judge " << chair << ") no junni de kimemasu" << endl;
+            cout << "shinsa-incho (" << name[chair-1] << ") no junni de kimemasu" << endl;
             for(int J=0;J<NofSchool;J++){
               if(flag_kessen2[scoretree[chair-1][J]] == true){
                 cout << setw(17) << ListOfSchool[scoretree[chair-1][J]] << " shinsa-incho no junni: " << setw(2) << J+1 << endl;
@@ -289,6 +292,14 @@ int KessenTouhyou(const int NofSchool, const int NofJudge, const vector<vector<i
 
 int main(){
 
+  // ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ç”¨ã®ofstreamã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆ
+  std::ofstream ofs(output_file);
+
+  // ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ­£å¸¸ã«é–‹ã‘ãŸã‹ç¢ºèª
+  if(!ofs){
+    cerr << "Cannot open file\n";
+    exit(0);
+  }//if
 
   //read file
   ifstream ifs(input_file);
@@ -297,35 +308,65 @@ int main(){
      exit(0);
   }
   string str;
-  int row_count = 0; //¹Ô¥«¥¦¥ó¥¿¡¼0¤Ï¤¸¤Ş¤ê
+  int row_count = 0; //è¡Œã‚«ã‚¦ãƒ³ã‚¿ãƒ¼0ã¯ã˜ã¾ã‚Š
 
   int NofSchool;
   int NofSchool_save;
   int NofJudge;
 
   vector<string> ListOfSchool;
+  vector<string> raw_score;
+  vector<string> name; //name[å¯©æŸ»å“¡ID]: å¯©æŸ»å“¡ã®ãƒ‹ãƒƒã‚¯ãƒãƒ¼ãƒ 
   vector<int> score;
-  vector<vector<int>> scoretree;   // scoretree[¿³ºº°÷ID][½ç°Ì] value=School ID
-  vector<vector<int>> outputtree;  //outputtree[¿³ºº°÷ID][³Ø¹»ID] value = ½ç°Ì  displayÉ½¼¨ÀìÍÑ
+  vector<vector<int>> scoretree;   // scoretree[å¯©æŸ»å“¡ID][é †ä½] value=School ID
+  vector<vector<int>> outputtree;  //outputtree[å¯©æŸ»å“¡ID][å­¦æ ¡ID] value = é †ä½  displayè¡¨ç¤ºå°‚ç”¨
 
   while (getline(ifs,str)) {
     stringstream ss(str);
     string item;
 
+    raw_score.clear();
     score.clear();
 
     while(ss >> item){
 
-      //1¹ÔÌÜ
+      //1è¡Œç›®
       if(row_count == 0){
         ListOfSchool.push_back(item);
       } //if
 
-      //2¹ÔÌÜ°Ê¹ß
+      //2è¡Œç›®ä»¥é™
       if(row_count != 0){
-        score.push_back(stoi(item));
+        //score.push_back(stoi(item));
+        raw_score.push_back(item);
       } //if
     } //while
+
+    //æœ€å¾Œåˆ—ã«ã¯å¯©æŸ»å“¡ã®ãƒ‹ãƒƒã‚¯ãƒãƒ¼ãƒ ãŒæ›¸ã‹ã‚Œã¦ã„ã‚‹ã€‚ã®ã§ã€åˆ¥é€”å‡¦ç†
+
+    //1è¡Œç›®
+    if(row_count == 0){
+        ListOfSchool.pop_back(); //æœ«å°¾ã®è¦ç´ ã‚’å˜ã«å‰Šé™¤ã™ã‚‹
+        for(size_t k=0;k<ListOfSchool.size();k++){
+          ListOfSchool[k].erase(0, 1); //æ ¡åã®"["ã‚’å‰Šé™¤ã™ã‚‹
+          ListOfSchool[k].erase(ListOfSchool[k].size() - 1, 1); //æ ¡åã®"]"ã‚’å‰Šé™¤ã™ã‚‹ pop_backé–¢æ•°ã§ã‚‚å¯
+        } //for k
+    } //if
+
+    //2è¡Œç›®
+    if(row_count != 0){
+        string tmp = raw_score.back();
+        name.push_back(tmp); //ã¾ãšã€raw_scoreã®æœ«å°¾ã®è¦ç´ ã‚’nameã«æ ¼ç´ã™ã‚‹
+        raw_score.pop_back(); //ã¾ãšã€raw_scoreã®æœ«å°¾ã®è¦ç´ ã‚’å‰Šé™¤ã™ã‚‹
+
+        //å„è¦ç´ ã®ã€Œä½ã€ã‚’å‰Šé™¤ã—ã¦ã€æ•°å€¤ã‚’scoreã«æ ¼ç´ã™ã‚‹
+        for(size_t k=0;k<raw_score.size();k++){
+          tmp = raw_score[k];
+          tmp.pop_back(); //æœ«å°¾è¦ç´ ã‚’å‰Šé™¤
+          score.push_back(stoi(tmp)); //scoreã«æ ¼ç´
+        } //for
+    } //if
+    
 
     NofSchool_save = ListOfSchool.size();
     NofSchool = score.size();
@@ -339,11 +380,11 @@ int main(){
     } //if
 
     if(row_count != 0){
-      outputtree.push_back(score); //¤Ò¤È¤Ş¤º£±¹ÔÊ¬¤ÎÃÍ¤òfill¤¹¤ë
-      scoretree.push_back(score); //¤Ò¤È¤Ş¤º£±¹ÔÊ¬¤ÎÃÍ¤òfill¤¹¤ë
+      outputtree.push_back(score); //ã²ã¨ã¾ãšï¼‘è¡Œåˆ†ã®å€¤ã‚’fillã™ã‚‹
+      scoretree.push_back(score); //ã²ã¨ã¾ãšï¼‘è¡Œåˆ†ã®å€¤ã‚’fillã™ã‚‹
       for(int i=0;i<NofSchool;i++){
-        outputtree[row_count-1][i] = outputtree[row_count-1][i] - 1; //¤³¤ì¤¬Àµ¤·¤¤ÃÍ
-        scoretree[row_count-1][score[i]-1] = i; //¤³¤ì¤¬Àµ¤·¤¤ÃÍ
+        outputtree[row_count-1][i] = outputtree[row_count-1][i] - 1; //ã“ã‚ŒãŒæ­£ã—ã„å€¤
+        scoretree[row_count-1][score[i]-1] = i; //ã“ã‚ŒãŒæ­£ã—ã„å€¤
       }  //for
     } //if
 
@@ -351,29 +392,29 @@ int main(){
   } //while
 
   NofJudge = row_count-1;
+  bool flag_stop = false;
 
   if(NofJudge < chair){
     cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
     cout << "Chair's number is strange!" << endl;
     cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-    return -1;
+    flag_stop = true;
   } //if
 
   if(NofJudge%2 == 0){
     cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
     cout << "Number of Judges must be odd!" << endl;
     cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-    return -1;
+    flag_stop = true;
   } //if
 
-  bool flag_stop = false;
   for(int I=0;I<NofJudge;I++){
     for(int J=0;J<NofSchool;J++){
       for(int JJ=J+1;JJ<NofSchool;JJ++){
         if(outputtree[I][J] == outputtree[I][JJ] && outputtree[I][J] != -999 && flag_stop == false){
           cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
           cout << "OVERLAPPING SCORES WERE DETECTED!" << endl;
-          cout << "IN Judge No. " << I+1 << ", RANK OF " << ListOfSchool[J]  << " AND " << ListOfSchool[JJ] << " ARE SAME: " << outputtree[I][J]+1 << endl;
+          cout << "IN Judge " << name[I] << ", RANK OF " << ListOfSchool[J]  << " AND " << ListOfSchool[JJ] << " ARE SAME: " << outputtree[I][J]+1 << endl;
           cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
           flag_stop = true;
         } //if
@@ -383,7 +424,7 @@ int main(){
       if((outputtree[I][J] < 0 || outputtree[I][J] >= NofSchool) && flag_stop == false){
         cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
         cout << "A SCORE OUT OF RANGE WAS DETECTED!" << endl;
-        cout << "IN Judge No. " << I+1 << ", RANK OF " << ListOfSchool[J] << " IS OUT OF RANGE: " << outputtree[I][J]+1 << endl;
+        cout << "IN Judge " << name[I] << ", RANK OF " << ListOfSchool[J] << " IS OUT OF RANGE: " << outputtree[I][J]+1 << endl;
         cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
         flag_stop = true;
       } //if
@@ -391,32 +432,47 @@ int main(){
   } //for I
   if(flag_stop == true) return -1;
 
-
+  //output
+  ofs << " \\begin{tabular}{r|l|";
+  for(int k=0;k<NofJudge;k++){
+    ofs << "r";
+  } //for
+  ofs << "|r|c|c}" << endl;;
+  ofs << "  \\hline" << endl;;
+  ofs << "  \\multirow{2}{*}{å‡ºæ¼”é †} & \\multirow{2}{*}{å›£ä½“å} & \\multicolumn{" << NofJudge << "}{|c|}{é †ä½} ";
+  ofs << "& \\multirow{2}{*}{\\textbf{ç·åˆé †ä½}} &  \\multirow{2}{*}{\\textbf{è³}} & \\multirow{2}{*}{\\textbf{å®Ÿéš›ã®è³}}\\\\" << endl;;
+  ofs << "  \\cline{3-" << NofJudge+2 << "}" << endl;
+  ofs << "  & & ";
+  for(int k=0;k<NofJudge;k++){
+    ofs << name[k] << " & ";
+  } //for
+  ofs << "& & \\\\" << endl;;
+  ofs << "  \\hline \\hline" << endl;;
 
   int count_junni = 1;
-  cout << "<<< The chair is Judge" << setw(2) << chair << " >>>" << endl;
+  cout << "<<< The chair is " << name[chair-1] << " >>>" << endl;
   while(count_junni <= NofSchool){
 
 
     if(flag_display == true || count_junni==1){
       if(flag_display == true) cout << "=======================================" << endl;
-      cout << "                  ";
+      cout << setw(18) << " ";
       for(int J=0;J<NofJudge;J++){
-        cout << "Judge" << setw(2) << J+1 << "  ";
+        cout << setw(10) << name[J] << "  ";
       } // for
       cout << endl;
 
       for(int I=0;I<NofSchool;I++){
-        cout << setw(17) << ListOfSchool[I] << " ";
+        cout << setw(18) << ListOfSchool[I] << " ";
         for(int J=0;J<NofJudge;J++){
-          if(outputtree[J][I] != -999) cout << setw(7) << outputtree[J][I]+1 << "  ";
+          if(outputtree[J][I] != -999) cout << setw(8) << outputtree[J][I]+1 << "  ";
           else  cout << "         ";
         } //for
       cout << endl;
       } //for
     } //if
 
-    //½ç°ÌÉ½¤Ç¡¢³Æ¿³ºº°÷¤ÎºÇ¾å°Ì¹»¤ò¥ê¥¹¥È¥¢¥Ã¥×¤¹¤ë
+    //é †ä½è¡¨ã§ã€å„å¯©æŸ»å“¡ã®æœ€ä¸Šä½æ ¡ã‚’ãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—ã™ã‚‹
     //int vote[NofSchool] = {};
     vector<int> vote;
     vector<int> vote_sort;
@@ -444,7 +500,7 @@ int main(){
 
     std::sort(vote_sort.begin(), vote_sort.end(), greater<int>());
 
-    int kakutei = -999; //ºÇ¾å°Ì½ç°Ì³ÎÄê¹»
+    int kakutei = -999; //æœ€ä¸Šä½é †ä½ç¢ºå®šæ ¡
 
     vector<int> kari_ni_vote;
     vector<int> NofSchool_kari_ni_vote;
@@ -465,9 +521,9 @@ int main(){
       } //if
     } //for
 
-    //kari_ni_vote[0]: ²¾¤ÎÂè£±°Ì¤ÎÆÀÉ¼¿ô
-    //kari_ni_vote[1]: ²¾¤ÎÂè£²°Ì¤ÎÆÀÉ¼¿ô
-    //kari_ni_vote[2]: ²¾¤ÎÂè£³°Ì¤ÎÆÀÉ¼¿ô ... ¤ÈÂ³¤¯
+    //kari_ni_vote[0]: ä»®ã®ç¬¬ï¼‘ä½ã®å¾—ç¥¨æ•°
+    //kari_ni_vote[1]: ä»®ã®ç¬¬ï¼’ä½ã®å¾—ç¥¨æ•°
+    //kari_ni_vote[2]: ä»®ã®ç¬¬ï¼“ä½ã®å¾—ç¥¨æ•° ... ã¨ç¶šã
 
     for(int R=0;R<kari_ni_vote.size();R++){
       //cout << "kari_ni_vote[" << R << "] : " << kari_ni_vote[R] << endl;
@@ -481,17 +537,17 @@ int main(){
       } //for
     } //for
 
-    //NofSchool_kari_ni_vote[0]: ²¾¤ÎÂè£±°Ì¤ÎÆÀÉ¼¿ô¤òÆÀ¤¿³Ø¹»¤Î¿ô
-    //NofSchool_kari_ni_vote[1]: ²¾¤ÎÂè£²°Ì¤ÎÆÀÉ¼¿ô¤òÆÀ¤¿³Ø¹»¤Î¿ô
-    //NofSchool_kari_ni_vote[2]: ²¾¤ÎÂè£³°Ì¤ÎÆÀÉ¼¿ô¤òÆÀ¤¿³Ø¹»¤Î¿ô ... ¤ÈÂ³¤¯
+    //NofSchool_kari_ni_vote[0]: ä»®ã®ç¬¬ï¼‘ä½ã®å¾—ç¥¨æ•°ã‚’å¾—ãŸå­¦æ ¡ã®æ•°
+    //NofSchool_kari_ni_vote[1]: ä»®ã®ç¬¬ï¼’ä½ã®å¾—ç¥¨æ•°ã‚’å¾—ãŸå­¦æ ¡ã®æ•°
+    //NofSchool_kari_ni_vote[2]: ä»®ã®ç¬¬ï¼“ä½ã®å¾—ç¥¨æ•°ã‚’å¾—ãŸå­¦æ ¡ã®æ•° ... ã¨ç¶šã
 
 
     bool flag_loop = false;
     int kari_junni = 0;
 
-    while(flag_loop != true){ //²áÈ¾¿ô¤ËÃ£¤¹¤ë¤Ş¤Ç¥ë¡¼¥×¤¹¤ë
+    while(flag_loop != true){ //éåŠæ•°ã«é”ã™ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—ã™ã‚‹
 
-      //Âè(kari_junni+1)°Ì¤Ş¤Ç¤ÎÃÄÂÎ¤Ç¡¢²áÈ¾¿ô¤ËÃ£¤¹¤ë¤«¡©
+      //ç¬¬(kari_junni+1)ä½ã¾ã§ã®å›£ä½“ã§ã€éåŠæ•°ã«é”ã™ã‚‹ã‹ï¼Ÿ
       int NofVote = 0;
       for(int j=0;j<=kari_junni;j++){
         NofVote = NofVote + NofSchool_kari_ni_vote[j]*kari_ni_vote[j];
@@ -510,7 +566,7 @@ int main(){
 
         int SelectedSchool = -999;
 
-        for(int i=kari_junni;i>=0;i--){ //²¾¤Î½ç°Ì¤¬Âç¤­¤¤Êı¤«¤é»Ï¤á¤ë
+        for(int i=kari_junni;i>=0;i--){ //ä»®ã®é †ä½ãŒå¤§ãã„æ–¹ã‹ã‚‰å§‹ã‚ã‚‹
 
           vector<bool> flag_kari_junni;
           int NofSchool_kari_junni = 0;
@@ -534,7 +590,7 @@ int main(){
             cout << "kari no " << i+1 << " i wo kangaemasu" << endl;
           } //if
 
-          if(NofSchool_kari_junni == 1){  //²¾¤ÎÂè(kari_junni +1)°Ì¤Î³Ø¹»¤¬£±¹»¤Î¾ì¹ç
+          if(NofSchool_kari_junni == 1){  //ä»®ã®ç¬¬(kari_junni +1)ä½ã®å­¦æ ¡ãŒï¼‘æ ¡ã®å ´åˆ
             for(int j=0;j<NofSchool;j++){
               if(vote[j] == kari_ni_vote[i]) SelectedSchool = j;
             } //for j
@@ -544,9 +600,9 @@ int main(){
 
           } //if
 
-          else{  //²¾¤ÎÂè(kari_junni +1)°Ì¤Î³Ø¹»¤¬Ê£¿ô¹»¤Î¾ì¹ç Æ±½ç°ÌÆâ¤Ç·èÁªÅêÉ¼
+          else{  //ä»®ã®ç¬¬(kari_junni +1)ä½ã®å­¦æ ¡ãŒè¤‡æ•°æ ¡ã®å ´åˆ åŒé †ä½å†…ã§æ±ºé¸æŠ•ç¥¨
 
-            SelectedSchool = KessenTouhyou(NofSchool, NofJudge, scoretree, flag_kari_junni, NofSchool_kari_junni, ListOfSchool);
+            SelectedSchool = KessenTouhyou(NofSchool, NofJudge, scoretree, flag_kari_junni, NofSchool_kari_junni, ListOfSchool, name);
           } //else
           
           if(i == 0){
@@ -555,16 +611,40 @@ int main(){
           } //if
         } //for i
 
-      } //if ²áÈ¾¿ô
+      } //if éåŠæ•°
 
-      //²áÈ¾¿ô¤ËÃ£¤·¤Ê¤¤¾ì¹ç
+      //éåŠæ•°ã«é”ã—ãªã„å ´åˆ
       else{
         kari_junni ++;
       } //else
     } //while
 
-    //¤³¤³¤Ş¤Ç¤Ç¡¢ºÇ¾å°Ì¹»¤¬³ÎÄê(kakutei)
-    //½ç°ÌÉ½¤«¤é¤½¤ÎÃÄÂÎ¤òºï½ü¤¹¤ë
+    //ã“ã“ã¾ã§ã§ã€æœ€ä¸Šä½æ ¡ãŒç¢ºå®š(kakutei)
+
+    string award;
+    if(count_junni <= NofSchool/3){
+      award = "é‡‘"; //é‡‘è³
+    } //if
+    else if(count_junni <= NofSchool*2/3){
+      award = "éŠ€"; //éŠ€è³
+    } //else if
+    else{
+      award = "éŠ…"; //éŠ…è³
+    } //else
+
+    ofs << setw(3) << kakutei+1 << " & " << ListOfSchool[kakutei] << " & ";
+    for(int k=0;k<NofJudge;k++){
+      ofs << outputtree[k][kakutei]+1 << " & "; //å„å¯©æŸ»å“¡ã®é †ä½
+    } //for
+    ofs << count_junni << " & "; //ç·åˆé †ä½
+    ofs << award << " & "; //é‡‘oréŠ€oréŠ…
+    ofs << " \\\\"; //å®Ÿéš›ã®è³
+    ofs << endl;
+    if(count_junni == NofSchool/3 || count_junni == NofSchool*2/3){
+      ofs << "  \\hline" << endl; //å®Ÿéš›ã®è³
+    } //if
+
+    //é †ä½è¡¨ã‹ã‚‰ãã®å›£ä½“ã‚’å‰Šé™¤ã™ã‚‹
     for(int J=0;J<NofJudge;J++){
       for(int I=0;I<NofSchool;I++){
         if(scoretree[J][I] == kakutei){
@@ -577,8 +657,14 @@ int main(){
     cout << "dai " << count_junni << " i: " << ListOfSchool[kakutei] << endl;
     count_junni ++;
 
-  } //while count_junni <= NofSchoo
+  } //while count_junni <= NofSchool
 
+  //end of output
+  ofs << "  \\hline" << endl; //å®Ÿéš›ã®è³
+  ofs << " \\end{tabular}"; //å®Ÿéš›ã®è³
+
+  ofs.close();
+  ifs.close();
   cout << "Well done!" << endl;
   return 0;
 
