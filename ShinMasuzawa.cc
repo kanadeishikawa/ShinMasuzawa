@@ -636,7 +636,7 @@ int main(){
     } //for
     ofs << count_junni << " & "; //総合順位
     ofs << award << " & "; //金or銀or銅
-    ofs << " \\\\"; //実際の賞
+    ofs << " \\\\"; //実際の賞 空欄
     ofs << endl;
     if(count_junni == NofSchool/3 || count_junni == NofSchool*2/3){
       ofs << "  \\hline" << endl; //実際の賞
