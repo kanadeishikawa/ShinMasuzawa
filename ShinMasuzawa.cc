@@ -12,8 +12,8 @@ using namespace std;
 #include <iomanip>
 
 const bool flag_display = false; //trueにすると集計過程を表示します。falseにすると総合順位のみ表示します。
-const char input_file[50] = "./infiles/score_All_Japan_kouhan_2024.dat"; //順位表のファイル名
-const char output_file[50] = "./outfiles/output_All_Japan_kouhan_2024.txt"; //出力先のファイル名
+const char input_file[60] = "./infiles/score_All_Japan_chuugaku_kouhan_2024.dat"; //順位表のファイル名
+const char output_file[60] = "./outfiles/output_All_Japan_chuugaku_kouhan_2024.txt"; //出力先のファイル名
 
 const int chair = 1; //審査員長の順位は審査表の最も上に記載
 

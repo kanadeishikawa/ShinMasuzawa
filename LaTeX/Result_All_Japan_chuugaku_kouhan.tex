@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper,landscape,twoside,openany,english,uplatex]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathcomp}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{ascmac}
+\usepackage{makeidx}
+\usepackage[explicit]{titlesec}
+\usepackage{picture}
+\usepackage[dvipdfmx,usenames]{color}
+\usepackage{layout}
+\usepackage{here}
+\usepackage{afterpage}
+\usepackage{anyfontsize}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage{bxpapersize}
+\usepackage{multirow}
+\usepackage[samesize]{cancel}
+%\usepackage[style=phys,articletitle=false,biblabel=brackets,chaptertitle=false,pageranges=false]{biblatex}
+\usepackage[style=phys,biblabel=brackets]{biblatex}
+%\usepackage[style=phys,biblabel=brackets,chaptertitle=false,pageranges=false]{biblatex}
+%\usepackage[style=alphabetic,sorting=none]{biblatex}
+%\addbibresource{test.bib}
+
+%%
+\setlength{\parindent}{11pt}
+\setlength{\parskip}{2pt plus 2pt minus 1 pt}
+%%\topmargin	-14pt
+%%\topmargin	0pt
+%%\headheight 0pt
+%%\headsep 0pt
+\topmargin	-40pt
+\headheight 15pt
+\headsep 20pt
+%%\evensidemargin	-25pt
+%%\oddsidemargin	-25pt
+\evensidemargin	0pt
+\oddsidemargin	0pt
+%%\textwidth	466pt
+\footskip 35pt
+\textwidth	416pt
+%%\textheight	678pt
+\textheight	635pt
+%%
+\definecolor{star}{RGB}{255,143,189}
+\definecolor{milky}{RGB}{44,255,220}
+\definecolor{soleil}{RGB}{255,246,161}
+\definecolor{selene}{RGB}{214,180,254}
+%%
+\setcounter{tocdepth}{3}
+%
+%chapter
+\def\BIG{\fontsize{30pt}{30pt}\selectfont}
+\def\HUGE{\fontsize{30pt}{30pt}\selectfont}
+%\titleformat{\chapter}[frame]{\bfseries \LARGE \filleft}{\enspace Chapter $\mathbf{\thechapter}$ \enspace}{50pt}{#1}[\vspace{50pt}]
+\titleformat{\chapter}[display]{\normalfont}{\vspace{30pt}\filright\BIG Chapter \thechapter}{30pt}{\HUGE\filright{#1}}[\vspace{10pt}]
+
+\titlespacing{\chapter}{0pt}{3pt}{6pt}[0pt]
+%section
+\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}\thesection\hspace{5pt}{#1}}\titlerule}[\vspace{-10pt}]
+%subsection
+\titleformat{\subsection}[block]{\large}{}{0pt}{\thesubsection\hspace{3pt}#1}[\vspace{-5pt}]
+%subsubsection
+\titleformat{\subsubsection}[block]{\large}{}{0pt}{\hspace{3pt}#1}[\vspace{-5pt}]
+%%%
+
+%%%%%\titleformat{\chapter}[hang]{\Huge}{Chap. \thechapter}{14pt}{#1}[]
+%%%%%%section
+%%%%%%\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}\thesection\hspace{5pt}#1}\titlerule}[\vspace{-10pt}]
+%%%%%\titleformat{\section}[block]{\Large}{\vspace{-10pt}}{0pt}{\titleline[l]{\rule[-4pt]{0.2cm}{1.1em}\hspace{5.7pt}#1}\titlerule}[\vspace{-10pt}]
+%%%%%%subsection
+%%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\thesubsection\hspace{3pt}#1}[\vspace{-5pt}]
+%%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\hspace{1pt}\textbf{#1}}[\vspace{-5pt}]
+%%%%%\titleformat{\subsection}[block]{\large}{}{0pt}{\hspace{1pt}#1}[\vspace{-5pt}]
+%%%%%%%
+
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+\newcommand{\migi}{--\textgreater}  %-->
+\newcommand{\hidari}{\textless--}  %<--
+\newcommand{\hidarimigi}{\textless--\textgreater}  %<-->
+\newcommand{\dainari}{\textgreater}  %>
+\newcommand{\shonari}{\textless}  %<
+\newcommand{\etap}{$\eta '$~}  %etap
+\newcommand{\hydrogen}{$\mathrm{H_{2}}$~}  %etap
+%%
+
+\widebaselines
+
+\begin{document}
+
+2024年度　全国大会中学の部　後半　投票結果　※上位1/3を金、下位1/3を銅としています。
+%\begin{landscape}
+\begin{table}[h]
+ \centering
+ \scalebox{0.73}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{tabular}{r|l|rrrrrrrrrrr|r|c|c}
+  \hline
+  \multirow{2}{*}{出演順} & \multirow{2}{*}{団体名} & \multicolumn{11}{|c|}{順位} & \multirow{2}{*}{\textbf{総合順位}} &  \multirow{2}{*}{\textbf{賞}} & \multirow{2}{*}{\textbf{実際の賞}}\\
+  \cline{3-13}
+  & & kaaaaaaaa & マードック & 😆 & 審☆美☆眼 & ゴミムシ & 明日もやるの？ & tk & 昭和マクロ & もりんこ & 審査方法違うよ & biwa & & & \\
+  \hline \hline
+  3 & 福野中 & 1 & 1 & 4 & 11 & 9 & 10 & 4 & 14 & 4 & 12 & 9 & 1 & 金 & 銀 \\
+ 14 & 土屋中 & 3 & 2 & 1 & 2 & 15 & 2 & 6 & 1 & 14 & 1 & 10 & 2 & 金 & 金 \\
+  1 & 小平三中 & 2 & 3 & 5 & 13 & 5 & 8 & 2 & 5 & 5 & 5 & 3 & 3 & 金 & 金 \\
+  9 & 中山五月台中 & 9 & 6 & 7 & 1 & 11 & 1 & 11 & 2 & 8 & 2 & 2 & 4 & 金 & 銀 \\
+ 13 & 永山南中 & 4 & 4 & 6 & 4 & 13 & 3 & 3 & 9 & 1 & 3 & 8 & 5 & 金 & 金 \\
+  \hline
+  5 & 向陽台中 & 5 & 5 & 2 & 7 & 10 & 9 & 5 & 6 & 15 & 6 & 1 & 6 & 銀 & 銀 \\
+ 15 & 武岡中 & 15 & 7 & 8 & 5 & 14 & 12 & 7 & 3 & 2 & 4 & 12 & 7 & 銀 & 銀 \\
+  4 & 海神中 & 13 & 8 & 12 & 10 & 7 & 11 & 8 & 4 & 6 & 7 & 4 & 8 & 銀 & 銀 \\
+  8 & 本渡中 & 6 & 9 & 9 & 12 & 8 & 5 & 9 & 7 & 9 & 9 & 11 & 9 & 銀 & 銀 \\
+ 10 & 中部中・浜の宮中 & 7 & 10 & 3 & 8 & 12 & 14 & 1 & 8 & 10 & 10 & 7 & 10 & 銀 & 銀 \\
+  \hline
+ 11 & 市川三中 & 8 & 11 & 10 & 9 & 4 & 4 & 10 & 10 & 11 & 8 & 6 & 11 & 銅 & 銀 \\
+ 12 & 日進西中 & 10 & 13 & 11 & 6 & 3 & 13 & 15 & 11 & 12 & 14 & 5 & 12 & 銅 & 銀 \\
+  6 & 高知学芸中 & 14 & 12 & 13 & 3 & 2 & 6 & 12 & 13 & 13 & 15 & 13 & 13 & 銅 & 銅 \\
+  7 & 出雲一中 & 11 & 15 & 14 & 14 & 1 & 7 & 14 & 12 & 7 & 13 & 15 & 14 & 銅 & 銀 \\
+  2 & 大社中 & 12 & 14 & 15 & 15 & 6 & 15 & 13 & 15 & 3 & 11 & 14 & 15 & 銅 & 銅 \\
+  \hline
+ \end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ }
+\end{table}
+%\end{landscape}
+
+%%% 小平市立小平第三中学校
+%%% 出雲市立大社中学校
+%%% 南砺市立福野中学校
+%%% 船橋市立海神中学校
+%%% 仙台市立向陽台中学校
+%%% 高知学芸中学校
+%%% 出雲市立第一中学校
+%%% 天草市立本渡中学校
+%%% 宝塚市立中山五月台中学校
+%%% 加古川市立中部中学校・浜の宮中学校合同
+%%% 市川市立第三中学校
+%%% 日進市立日進西中学校
+%%% 旭川市立永山南中学校
+%%% さいたま市立土屋中学校
+%%% 鹿児島市立武岡中学校
+
+
+\end{document}
+

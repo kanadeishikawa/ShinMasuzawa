@@ -20,9 +20,9 @@ rm -f *.xml
 #uplatex -synctex=1 Result_All_Japan_zenhan.tex
 #uplatex -synctex=1 Result_All_Japan_zenhan.tex
 #dvipdfmx -f ptex-haranoaji.map Result_All_Japan_zenhan.dvi
-uplatex -synctex=1 Result_All_Japan_kouhan.tex
-uplatex -synctex=1 Result_All_Japan_kouhan.tex
-dvipdfmx -f ptex-haranoaji.map Result_All_Japan_kouhan.dvi
+uplatex -synctex=1 Result_All_Japan_chuugaku_kouhan.tex
+uplatex -synctex=1 Result_All_Japan_chuugaku_kouhan.tex
+dvipdfmx -f ptex-haranoaji.map Result_All_Japan_chuugaku_kouhan.dvi
 rm -f *.gz
 rm -f *.aux
 rm -f *.log
